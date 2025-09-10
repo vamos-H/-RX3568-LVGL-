@@ -1,0 +1,1453 @@
+
+#include <unistd.h>
+#include <pthread.h>
+#include <time.h>
+#include <stdio.h>
+#include "chess.h"
+
+
+lv_obj_t *main_ui = NULL;
+lv_obj_t *game_ui = NULL;
+lv_obj_t *over_ui = NULL;
+
+lv_obj_t *chi_image_obj = NULL;       // 全局指针，指向“吃子”图片对象
+lv_timer_t *chi_hide_timer = NULL; 
+
+MoveHistory move_history[500];  // 移动历史记录
+int move_count = 0;             // 当前移动步数
+int current_move = 0;           // 当前显示的移动步数
+
+lv_obj_t *undo_btn = NULL;
+lv_obj_t *redo_btn = NULL;
+lv_obj_t *undo_label = NULL;
+lv_obj_t *redo_label = NULL;
+
+void display_chi_image(int captured_camp) 
+{
+    const char* image_src;
+    if (captured_camp == RED) 
+    {
+        image_src = "A:./pic/chi1.png"; // 吃红棋显示 chi1.png
+    } 
+    else 
+    { // BLACK
+        image_src = "A:./pic/chi2.png"; // 吃黑棋显示 chi2.png
+    }
+
+    if (chi_image_obj == NULL) 
+    {
+        chi_image_obj = lv_image_create(game_ui);
+        lv_obj_align(chi_image_obj, LV_ALIGN_CENTER, 0, 0); // 显示在中心
+    } 
+    else 
+    {
+        lv_obj_clear_flag(chi_image_obj, LV_OBJ_FLAG_HIDDEN); // 如果已存在，则使其可见
+    }
+    lv_image_set_src(chi_image_obj, image_src); // 设置图片源
+}
+
+// 延迟隐藏图片的回调函数
+static void hide_chi_image_cb(lv_timer_t *timer) 
+{
+    if (chi_image_obj != NULL) 
+    {
+        lv_obj_add_flag(chi_image_obj, LV_OBJ_FLAG_HIDDEN);
+    }
+    
+    // 删除定时器
+    lv_timer_del(timer);
+    chi_hide_timer = NULL;
+}
+
+// 触发显示和延迟隐藏图片效果的函数
+void show_chi_effect(int captured_camp) 
+{
+    display_chi_image(captured_camp);
+    
+    // 如果已有定时器，先删除
+    if (chi_hide_timer != NULL) {
+        lv_timer_del(chi_hide_timer);
+        chi_hide_timer = NULL;
+    }
+    
+    // 创建新定时器
+    chi_hide_timer = lv_timer_create(hide_chi_image_cb, 1000, NULL);
+    lv_timer_set_repeat_count(chi_hide_timer, 1);
+}
+
+
+void init_screen_click() 
+{
+    lv_obj_t * screen = lv_scr_act();
+    lv_obj_add_flag(screen, LV_OBJ_FLAG_CLICKABLE); // 使屏幕可点击
+    lv_obj_add_event_cb(screen, qizi_event_handler, LV_EVENT_CLICKED, NULL);
+}
+
+void button_s_callback(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_CLICKED)
+    {
+        player = RED;
+        qizi_init();
+        game_screen();
+        lv_obj_add_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+
+void main_screen(void)
+{
+    
+    main_ui = lv_obj_create(lv_screen_active());
+    lv_obj_set_size(main_ui,1024,600);
+    lv_obj_align(main_ui,LV_ALIGN_CENTER,0,0);
+
+    static lv_style_t main_style;
+    lv_style_init(&main_style);
+    lv_style_set_pad_all(&main_style, 0); //内边距为0
+    lv_style_set_border_width(&main_style, 0); //边框的宽度为0，移除边框
+    lv_style_set_bg_color(&main_style, lv_color_hex(0x00E3AD75));
+    lv_obj_add_style(main_ui, &main_style, 0); //样式添加到窗口控件中
+
+    //打印棋盘图片
+    lv_obj_t * pic1 = lv_image_create(main_ui);
+    lv_obj_align(pic1,LV_ALIGN_CENTER,0,0);
+    lv_image_set_src(pic1,"A:./pic/qipan1.bmp");
+
+    //创建开始按键
+    lv_obj_t* button_s = lv_button_create(main_ui);
+    lv_obj_set_size(button_s,81,230);
+    lv_obj_align(button_s,LV_ALIGN_CENTER,-100,0);
+
+    //设置按键A的样式
+    static lv_style_t buttonA_style;
+    lv_style_init(&buttonA_style);
+    lv_style_set_pad_all(&buttonA_style, 0); //内边距为0
+    lv_style_set_border_width(&buttonA_style, 0);
+    lv_style_set_bg_color(&buttonA_style, lv_color_hex(0x00E3AD75));
+    lv_obj_add_style(button_s, &buttonA_style, 0);
+
+    //在按键上创建一个图片控件指定显示图片的路径
+    lv_obj_t *buttonA_image = lv_image_create(button_s);
+    lv_image_set_src(buttonA_image, "A:./pic/start_game.png");
+
+    lv_obj_add_event_cb(button_s, button_s_callback, LV_EVENT_CLICKED, NULL);
+
+
+    
+}
+
+void button_q_callback(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_CLICKED)
+    {
+        
+        lv_obj_add_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+// 获取LVGL棋子对象对应的Qizi结构体指针
+Qizi* get_qizi_by_lv_obj(lv_obj_t* obj) 
+{
+    for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 9; ++j) {
+            if (chessboard[i][j] != NULL && chessboard[i][j]->live && chessboard[i][j]->pic == obj) {
+                return chessboard[i][j];
+            }
+        }
+    }
+    return NULL;
+}
+
+
+// lv_obj_t *countdown_label = NULL;
+// lv_timer_t *countdown_timer = NULL;
+// int countdown_seconds = 60; // 60秒倒计时
+
+// // 创建倒计时标签
+// void create_countdown_label(void) {
+//     if (countdown_label == NULL) {
+//         countdown_label = lv_label_create(game_ui);
+//         lv_obj_set_style_text_font(countdown_label, &lv_font_montserrat_24, 0);
+//         lv_obj_set_style_text_color(countdown_label, lv_color_hex(0xFF0000), 0);
+//         lv_obj_align(countdown_label, LV_ALIGN_TOP_RIGHT, -200, 100);
+        
+//         // 初始显示
+//         static char countdown_text[20];
+//         snprintf(countdown_text, sizeof(countdown_text), "倒计时: %02d", countdown_seconds);
+//         lv_label_set_text(countdown_label, countdown_text);
+//     }
+// }
+
+// // 更新倒计时的回调函数
+// void update_countdown_cb(lv_timer_t *timer) {
+//     if (countdown_seconds > 0) {
+//         countdown_seconds--;
+        
+//         // 更新显示
+//         static char countdown_text[20];
+//         snprintf(countdown_text, sizeof(countdown_text), "倒计时: %02d", countdown_seconds);
+//         lv_label_set_text(countdown_label, countdown_text);
+        
+//         // 当倒计时少于10秒时改变颜色为红色
+//         if (countdown_seconds <= 10) {
+//             lv_obj_set_style_text_color(countdown_label, lv_color_hex(0xFF0000), 0);
+//         } else {
+//             lv_obj_set_style_text_color(countdown_label, lv_color_hex(0x000000), 0);
+//         }
+//     } else {
+//         // 倒计时结束，游戏结束
+//         stop_countdown();
+        
+//         // 显示游戏结束信息
+//         lv_obj_t *game_over_label = lv_label_create(game_ui);
+//         lv_obj_set_style_text_font(game_over_label, &lv_font_montserrat_32, 0);
+//         lv_obj_set_style_text_color(game_over_label, lv_color_hex(0xFF0000), 0);
+//         lv_label_set_text(game_over_label, player == RED ? "黑方胜利!" : "红方胜利!");
+//         lv_obj_align(game_over_label, LV_ALIGN_CENTER, 0, 0);
+        
+//         // 添加一个重新开始按钮
+//         lv_obj_t *restart_btn = lv_btn_create(game_ui);
+//         lv_obj_set_size(restart_btn, 120, 50);
+//         lv_obj_align(restart_btn, LV_ALIGN_CENTER, 0, 60);
+//         lv_obj_t *restart_label = lv_label_create(restart_btn);
+//         lv_label_set_text(restart_label, "重新开始");
+//         lv_obj_center(restart_label);
+        
+//         // 重新开始按钮的回调
+//         lv_obj_add_event_cb(restart_btn, button_s_callback, LV_EVENT_CLICKED, NULL);
+        
+//         printf("时间到! %s胜利\n", player == RED ? "黑方" : "红方");
+//     }
+// }
+
+// // 重置倒计时
+// void reset_countdown(void) {
+//     countdown_seconds = 60;
+    
+//     // 更新显示
+//     if (countdown_label) {
+//         static char countdown_text[20];
+//         snprintf(countdown_text, sizeof(countdown_text), "倒计时: %02d", countdown_seconds);
+//         lv_label_set_text(countdown_label, countdown_text);
+//         lv_obj_set_style_text_color(countdown_label, lv_color_hex(0x000000), 0);
+//     }
+// }
+
+// // 停止倒计时
+// void stop_countdown(void) {
+//     if (countdown_timer) {
+//         lv_timer_del(countdown_timer);
+//         countdown_timer = NULL;
+//     }
+// }
+
+// // 开始倒计时
+// void start_countdown(void) {
+//     stop_countdown(); // 确保没有其他计时器在运行
+    
+//     countdown_timer = lv_timer_create(update_countdown_cb, 1000, NULL);
+//     lv_timer_set_repeat_count(countdown_timer,10000);
+// }
+
+
+int movement_che(Qizi *qizi,int target_x,int target_y)
+{
+    if(target_x!=qizi->x && target_y!=qizi->y)  //目标位置不在同一行或同一列直接返回-1
+    {
+        printf("车走法错误1.\n");
+        return -1;
+    }
+    else if(target_x == qizi->x)
+    {
+        if(qizi->y<target_y)
+        {
+            for(int i=qizi->y+1;i<target_y;i++) //到目标位置之间不存在棋子
+            {
+                if(chessboard[qizi->x][i]!=NULL)
+                {
+                    printf("车走法错误2.\n");
+                    return -1;
+                }
+            }
+        }
+        else
+        {
+            for(int i=qizi->y-1;i>target_y;i--)
+            {
+                if(chessboard[qizi->x][i]!=NULL)
+                {
+                    printf("车走法错误3.\n");
+                    return -1;
+                }
+
+            }
+        }
+    }
+    else
+    {
+        if(qizi->x < target_x)
+        {
+            for(int i=qizi->x+1;i<target_x;i++)
+            {
+                if(chessboard[i][qizi->y]!=NULL)
+                {
+                    printf("车走法错误4.\n");
+                    return -1;
+                }
+
+            }
+        }
+        else
+        {
+            for(int i=qizi->x-1;i>target_x;i--)
+            {
+                if(chessboard[i][qizi->y]!=NULL)
+                {
+                    printf("车走法错误5.\n");
+                    return -1;
+                }
+
+            }
+        }
+    }
+    return 1;
+}
+
+int movement_ma(Qizi *qizi,int target_x,int target_y)
+{
+    int num = (qizi->x - target_x)*(qizi->x - target_x) + (qizi->y - target_y)*(qizi->y - target_y);
+    if(num!=5)
+    {
+        printf("马走法错误\n");
+        return -1;
+    }
+
+    if((abs(qizi->x-target_x))>(abs(qizi->y-target_y)))
+    {
+        if(qizi->x > target_x)
+        {
+            if(chessboard[qizi->x-1][qizi->y]!=NULL)
+            {
+                printf("路径被阻断1\n");
+                return -1;
+            }
+        }
+        else
+        {
+            if(chessboard[qizi->x+1][qizi->y]!=NULL)
+            {
+                printf("路径被阻断2\n");
+                return -1;
+            }
+        }
+
+    }
+    else
+    {
+        if(qizi->y>target_y)
+        {
+            if(chessboard[qizi->x][qizi->y-1]!=NULL)
+            {
+                printf("路径被阻断3\n");
+                return -1;
+            }
+        }
+        else
+        {
+            if(chessboard[qizi->x][qizi->y+1]!=NULL)
+            {
+                printf("路径被阻断4\n");
+                return -1;
+            }
+        }
+    }
+    return 1;
+}
+
+int movement_xiang(Qizi *qizi,int target_x,int target_y)
+{
+
+    int num = (qizi->x - target_x)*(qizi->x - target_x) + (qizi->y - target_y)*(qizi->y - target_y);
+    if(num!=8)
+    {
+        printf("象走法错误\n");
+        return -1;
+    }
+
+    if(qizi->camp==RED)
+    {
+        if(target_x<5)
+        {
+            printf("象不能过河\n");
+            return -1;
+        }
+    }
+    else
+    {
+        if(target_x>4)
+        {
+            printf("象不能过河\n");
+            return -1;
+        }
+    }
+
+    if(qizi->y >target_y)
+    {
+        if(qizi->x >target_x)
+        {
+            if(chessboard[qizi->x-1][qizi->y-1]!=NULL)
+            {
+                printf("路径被阻断1\n");
+                return -1;
+            }
+        }
+        else
+        {
+             if(chessboard[qizi->x+1][qizi->y-1]!=NULL)
+            {
+                printf("路径被阻断2\n");
+                return -1;
+            }
+        }
+    }
+    else
+    {
+        if(qizi->x > target_x)
+        {
+            if(chessboard[qizi->x-1][qizi->y+1]!=NULL)
+            {
+                printf("路径被阻断3\n");
+                return -1;
+            }
+        }
+        else
+        {
+            if(chessboard[qizi->x+1][qizi->y+1]!=NULL)
+            {
+                printf("路径被阻断4\n");
+                return -1;
+            }
+        }
+    }
+    return 1;
+}
+
+int movement_shi(Qizi *qizi,int target_x,int target_y)
+{
+    int num = (qizi->x - target_x)*(qizi->x - target_x) + (qizi->y - target_y)*(qizi->y - target_y);
+    if(num!=2)
+    {
+        printf("士走法错误\n");
+        return -1;
+    }
+    if(chessboard[qizi->x][qizi->y]->camp==RED)
+    {
+        if(target_y>5||target_y<3)
+        {
+            printf("士不能走远1\n");
+            return -1;
+        }
+        if(target_x<7)
+        {
+            printf("士不能走远2\n");
+            return -1;
+        }
+    }
+    else
+    {
+        if(target_y>5||target_y<3)
+        {
+            printf("士不能走远3\n");
+            return -1;
+        }
+        if(target_x>2)
+        {
+            printf("士不能走远4\n");
+            return -1;
+        }
+    }
+    return 1;
+}
+
+int movement_jiang(Qizi *qizi,int target_x,int target_y)
+{
+    int n =0;
+    if(red_s.y==black_j.y)
+    {
+
+        for(int i=black_j.x+1;i<red_s.x;i++)
+        {
+            if(chessboard[i][red_s.y]!=NULL)
+            {
+                n++;
+            }
+        }
+        if(0==n)
+        {
+            if(player==RED)
+            {
+                if(target_x==black_j.x && target_y==black_j.y)
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                if(target_x==red_s.x && target_y==red_s.y)
+                {
+                    return 1;
+                }
+            }
+        }
+    }
+
+
+    int num = (qizi->x - target_x)*(qizi->x - target_x) + (qizi->y - target_y)*(qizi->y - target_y);
+    if(num!=1)
+    {
+        printf("帅走法错误\n");
+        return -1;
+    }
+    if(qizi->camp==RED)
+    {
+        if(target_y>5||target_y<3)
+        {
+            printf("帅不能走远1\n");
+            return -1;
+        }
+        if(target_x<7)
+        {
+            printf("帅不能走远2\n");
+            return -1;
+        }
+    }
+    else
+    {
+        if(target_y>5||target_y<3)
+        {
+            printf("帅不能走远3\n");
+            return -1;
+        }
+        if(target_x>2)
+        {
+            printf("帅不能走远4\n");
+            return -1;
+        }
+    }
+    return 1;
+}
+
+int movement_bing(Qizi *qizi,int target_x,int target_y)
+{
+    int num = (qizi->x - target_x)*(qizi->x - target_x) + (qizi->y - target_y)*(qizi->y - target_y);
+    if(num!=1)
+    {
+        printf("兵走法错误\n");
+        return -1;
+    }
+    if(qizi->camp==RED)
+    {
+        if(target_x>qizi->x)
+        {
+            printf("兵不能回头\n");
+            return -1;
+        }
+        if(target_x>4)
+        {
+            if(target_y!=qizi->y)
+            {
+                printf("过河前不能左右跑\n");
+                return -1;
+            }
+        }
+    }
+    else 
+    {
+        if(target_x<qizi->x)
+        {
+            printf("兵不能回头\n");
+            return -1;
+        }
+        if(target_x<5)
+        {
+            if(target_y!=qizi->y)
+            {
+                printf("过河前不能左右跑\n");
+                return -1;
+            }
+        }
+    }
+    return 1;
+}
+
+int movement_pao(Qizi *qizi,int target_x,int target_y)
+{
+    int g=0;
+    if(target_x!=qizi->x && target_y!=qizi->y)  //目标位置不在同一行或同一列直接返回-1
+    {
+        printf("炮走法错误1.\n");
+        return -1;
+    }
+    else if(target_x==qizi->x)  //在y轴上走
+    {
+        if(qizi->y<target_y)
+        {
+            
+            for(int i=qizi->y+1;i<=target_y;i++) //到目标位置之间不存在棋子
+            {
+                if(chessboard[qizi->x][i]!=NULL)
+                {
+                    g++;
+                }
+
+            }
+            if(g==0)
+            {
+                return 1;
+            }
+            else if(g==2)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("炮走法错误1\n");
+                return -1;
+            }
+        }
+        else
+        {
+            for(int i=qizi->y-1;i>=target_y;i--)
+            {
+                if(chessboard[qizi->x][i]!=NULL)
+                {
+                    g++;
+                }
+
+            }
+            if(g==0)
+            {
+                return 1;
+            }
+            else if(g==2)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("炮走法错误2\n");
+                return -1;
+            }
+
+        }
+    }
+    else if(target_y==qizi->y)
+    {
+        if(qizi->x<target_x)
+        {
+            for(int i=qizi->x+1;i<=target_x;i++)
+            {
+                if(chessboard[i][qizi->y]!=NULL)
+                {
+                    g++;
+                }
+            }
+            
+            if(g==0)
+            {
+                return 1;
+            }
+            else if(g==2)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("炮走法错误3\n");
+                return -1;
+            }
+        }
+        else
+        {
+
+            for(int i=qizi->x-1;i>=target_x;i--)
+            {
+                if(chessboard[i][qizi->y]!=NULL)
+                {
+                    g++;
+                }
+
+            }
+            if(g==0)
+            {
+                return 1;
+            }
+            else if(g==2)
+            {
+                return 1;
+            }
+            else
+            {
+                printf("炮走法错误4\n");
+                return -1;
+            }
+
+        }
+
+    }
+    return 1;
+}
+
+
+
+static void anim_completed_cb(lv_anim_t * anim) 
+{
+    Qizi *qizi = anim->user_data;
+    if (qizi) 
+    {
+        // 动画完成后可以执行一些操作，比如更新状态
+        printf("动画完成: 棋子移动到 (%d, %d)\n", qizi->x, qizi->y);
+    }
+}
+
+// 设置棋子位置的动画函数
+static void set_qizi_pos_anim(void * var, int32_t value_x, int32_t value_y) 
+{
+    lv_obj_t * obj = (lv_obj_t *)var;
+    lv_obj_set_pos(obj, value_x, value_y);
+}
+
+void animate_qizi_move(Qizi* qizi, int target_x, int target_y) 
+{
+    if (qizi == NULL || qizi->pic == NULL) return;
+    
+    // 计算起始和结束位置（屏幕坐标）
+    int start_x = lv_obj_get_x(qizi->pic);
+    int start_y = lv_obj_get_y(qizi->pic);
+    
+    // 计算目标屏幕坐标
+    int end_x = 182 + 36 - 30 + 65 * target_x;
+    int end_y = 45 - 30 + 65 * target_y;
+    
+    // 创建X轴动画
+    lv_anim_t anim_x;
+    lv_anim_init(&anim_x);
+    lv_anim_set_var(&anim_x, qizi->pic);
+    lv_anim_set_values(&anim_x, start_x, end_x);
+    lv_anim_set_time(&anim_x, 300);  // 动画时长300ms
+    lv_anim_set_exec_cb(&anim_x, (lv_anim_exec_xcb_t)lv_obj_set_x);
+    lv_anim_set_path_cb(&anim_x, lv_anim_path_ease_out);  // 使用缓动效果
+    lv_anim_set_ready_cb(&anim_x, anim_completed_cb);
+    lv_anim_set_user_data(&anim_x, qizi);
+    lv_anim_start(&anim_x);
+    
+    // 创建Y轴动画
+    lv_anim_t anim_y;
+    lv_anim_init(&anim_y);
+    lv_anim_set_var(&anim_y, qizi->pic);
+    lv_anim_set_values(&anim_y, start_y, end_y);
+    lv_anim_set_time(&anim_y, 300);
+    lv_anim_set_exec_cb(&anim_y, (lv_anim_exec_xcb_t)lv_obj_set_y);
+    lv_anim_set_path_cb(&anim_y, lv_anim_path_ease_out);
+    lv_anim_start(&anim_y);
+}
+
+
+// 棋子移动函数
+void move_qizi(Qizi* qizi, int target_x, int target_y)
+{
+    printf("移动内部坐标: target_x=%d target_y=%d\n",target_x,target_y);
+    printf("移动内部坐标: qizi_x=%d qizi_y=%d\n",qizi->x,qizi->y);
+    printf("准备移动\n");
+    int flag = 1;
+    if(qizi==NULL)
+    {
+        return ;
+    }
+
+    switch(qizi->type)
+    {
+        case QZ_C:
+            flag = movement_che(qizi,target_x,target_y);
+            break;
+        case QZ_M:
+            flag = movement_ma(qizi,target_x,target_y);
+            break;
+        case QZ_X:
+            flag = movement_xiang(qizi,target_x,target_y);
+            break;
+        case QZ_S:
+            flag = movement_shi(qizi,target_x,target_y);
+            break;
+        case QZ_J:
+            flag = movement_jiang(qizi,target_x,target_y);
+            break;
+        case QZ_B:
+            flag = movement_bing(qizi,target_x,target_y);
+            break;
+        case QZ_P:
+            flag = movement_pao(qizi,target_x,target_y);
+            break;
+    }
+
+    if(-1==flag)
+    {
+        qizi->selected = false; // 取消选中状态
+        selected_qizi = NULL;   // 清空全局选中棋子指针
+        return ;
+    }
+
+
+
+    int from_x = qizi->x;
+    int from_y = qizi->y;
+    Qizi* captured = NULL;
+
+
+    if(chessboard[target_x][target_y]!=NULL && chessboard[target_x][target_y]->live==1)
+    {
+        if(1==flag)
+        {
+            captured = chessboard[target_x][target_y];
+            show_chi_effect(qizi->camp);
+            printf("正在删除被吃棋子\n");
+            chessboard[target_x][target_y]->live = 0;
+            lv_obj_add_flag(chessboard[target_x][target_y]->pic, LV_OBJ_FLAG_HIDDEN); // 隐藏LVGL对象
+            printf("删除完毕\n");
+        }
+    }
+    printf("进行移动\n");
+
+    chessboard[qizi->x][qizi->y] = NULL;
+    qizi->x = target_x;
+    qizi->y = target_y;
+    chessboard[target_x][target_y] = qizi;
+
+    animate_qizi_move(qizi, target_x, target_y);
+    //lv_obj_align(qizi->pic,LV_ALIGN_TOP_LEFT,182 + 36 - 30 + 65 * qizi->x,45 - 30 + 65 * qizi->y);
+    record_move(qizi, from_x, from_y, target_x, target_y, captured);
+
+    qizi->selected = false; // 取消选中状态
+    selected_qizi = NULL;   // 清空全局选中棋子指针
+
+    if(red_s.live == 0 || black_j.live == 0)
+    {
+
+        printf("game over\n");
+        lv_obj_t * game_over = lv_image_create(game_ui);
+        lv_obj_align(game_over,LV_ALIGN_CENTER,0,0);
+        lv_image_set_src(game_over,"A:./pic/game_over.png");
+        return ;
+
+    }
+
+    // 切换玩家回合
+    player = (player == RED) ? BLACK : RED;
+    printf("当前玩家为: %s\n", (player == RED) ? "RED" : "BLACK");
+
+    // TODO: 添加将军/将死判断
+}
+
+int i=0;
+
+void qizi_event_handler(lv_event_t *e)
+{
+    int target_ture_x = -1,target_ture_y = -1;
+    int target_x = -1,target_y = -1;
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* obj = lv_event_get_target(e);
+
+    printf("%d\n",i++);
+
+    if(LV_EVENT_CLICKED==code)
+    {
+        //Qizi *click_qizi = get_qizi_by_lv_obj(obj);
+        lv_indev_t *indev = lv_event_get_indev(e);
+
+        lv_point_t point;
+        lv_indev_get_point(indev, &point);
+        printf("点击的屏幕坐标为: x=%d, y=%d\n", point.x, point.y);
+
+        target_ture_x = point.x;
+        target_ture_y = point.y; 
+        target_x = (target_ture_x - 182 - 36 + 30 + 15) / 65;
+        target_y = (target_ture_y - 45 + 30 + 15) / 65;
+        printf("棋盘坐标为: x=%d, y=%d\n", target_x,target_y);
+
+        if(target_x<0||target_x>9)
+        {
+            printf("请点击正确的区域/n");
+            return ;
+        }
+        if(target_y<0||target_y>8)
+        {
+            printf("请点击正确的区域/n");
+            return ;
+        }
+
+        Qizi *click_qizi = chessboard[target_x][target_y];
+
+        if(click_qizi)  //选中了棋子
+        {
+            if(selected_qizi == NULL)   //还未选中棋子
+            {
+                if(click_qizi->camp == player)
+                {
+                    printf("已选择棋子坐标为 x=%d, y=%d\n",click_qizi->x,click_qizi->y);
+                    selected_qizi = click_qizi;
+                    selected_qizi->selected = true;
+
+                    //添加棋子高亮显示,改变边框样式
+                    lv_obj_set_style_border_color(selected_qizi->pic, lv_color_hex(0x66ffff), LV_PART_MAIN); // 红色边框
+                    lv_obj_set_style_border_width(selected_qizi->pic, 3, LV_PART_MAIN);
+
+                    //显示可以走向的位置
+
+                }
+                else
+                {
+                    //点击了对面的棋子
+                    printf("请点击自己的棋子。\n");
+                }
+
+            }
+            else    //已经选中了一枚棋子了
+            {
+                if(selected_qizi == click_qizi)
+                {
+                    //移除高亮
+                    lv_obj_set_style_border_width(selected_qizi->pic, 0, LV_PART_MAIN); // 移除边框
+                    selected_qizi->selected = false;
+                    selected_qizi = NULL;
+
+                    //移除可以走向的位置
+
+                }
+                else if(selected_qizi->camp == click_qizi->camp)
+                {
+                    printf("以切换棋子为: x=%d, y=%d\n",click_qizi->x,click_qizi->y);
+                    //之前选中的棋子移除高亮
+                    lv_obj_set_style_border_width(selected_qizi->pic, 0, LV_PART_MAIN); // 移除边框
+                    selected_qizi->selected = false;
+                    selected_qizi = click_qizi;
+                    selected_qizi->selected = true;
+
+                    //添加棋子高亮显示，例如改变边框样式
+                    lv_obj_set_style_border_color(selected_qizi->pic, lv_color_hex(0x66ffff), LV_PART_MAIN); // 红色边框
+                    lv_obj_set_style_border_width(selected_qizi->pic, 3, LV_PART_MAIN);
+
+                    //显示可以走向的位置
+
+                }
+                else    //点击的对方棋子
+                {
+                    printf("正常删除中\n");
+                    lv_obj_set_style_border_width(selected_qizi->pic, 0, LV_PART_MAIN);
+                    move_qizi(selected_qizi,target_x,target_y);
+                }
+            }
+        }
+        else    //点击的空白处
+        {
+            if(selected_qizi==NULL)
+            {
+                printf("请点击棋子进行移动\n");
+                return ;
+            }
+            else
+            {
+
+                printf("往空白处移动\n");
+                lv_obj_set_style_border_width(selected_qizi->pic, 0, LV_PART_MAIN);
+                move_qizi(selected_qizi,target_x,target_y);
+                
+            }
+        }
+    }
+}
+
+
+
+void game_screen(void)
+{
+
+    game_ui = lv_obj_create(lv_screen_active());
+    lv_obj_set_size(game_ui,1024,600);
+    lv_obj_align(game_ui,LV_ALIGN_CENTER,0,0);
+
+    static lv_style_t game_style;
+    lv_style_init(&game_style);
+    lv_style_set_pad_all(&game_style, 0); //内边距为0
+    lv_style_set_border_width(&game_style, 0); //边框的宽度为0，移除边框
+    lv_style_set_bg_color(&game_style, lv_color_hex(0x00E3AD75));
+    lv_obj_add_style(game_ui, &game_style, 0); //样式添加到窗口控件中
+
+    //打印棋盘图片
+    lv_obj_t * pic1 = lv_image_create(game_ui);
+    lv_obj_align(pic1,LV_ALIGN_CENTER,0,0);
+    lv_image_set_src(pic1,"A:./pic/qipan1.bmp");
+
+    //打印退出按键
+    lv_obj_t * button_q = lv_button_create(game_ui);
+    lv_obj_set_size(button_q,100,200);
+    lv_obj_set_pos(button_q,0,0);
+
+    lv_obj_add_style(button_q, &game_style, 0);
+
+    lv_obj_t * pic_quit = lv_image_create(button_q);
+    lv_image_set_src(pic_quit,"A:./pic/quit_game.png");
+
+    //打印棋子
+
+    static lv_style_t chess_style;
+    lv_style_init(&chess_style);
+    lv_style_set_pad_all(&chess_style, 0); //内边距为0
+    lv_style_set_border_width(&chess_style, 0); //边框的宽度为0，移除边框
+    lv_style_set_bg_color(&chess_style, lv_color_hex(0x00E3AD75));
+
+    black_c1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_c1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_c1.x,45-30+65*black_c1.y);
+    lv_image_set_src(black_c1.pic,black_c1.pic_add);
+    lv_obj_add_flag(black_c1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_c1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_c2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_c2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_c2.x,45-30+65*black_c2.y);
+    lv_image_set_src(black_c2.pic,black_c2.pic_add);
+    lv_obj_add_flag(black_c2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_c2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_m1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_m1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_m1.x,45-30+65*black_m1.y);
+    lv_image_set_src(black_m1.pic,black_m1.pic_add);
+    lv_obj_add_flag(black_m1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_m1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_m2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_m2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_m2.x,45-30+65*black_m2.y);
+    lv_image_set_src(black_m2.pic,black_m2.pic_add);
+    lv_obj_add_flag(black_m2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_m2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_x1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_x1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_x1.x,45-30+65*black_x1.y);
+    lv_image_set_src(black_x1.pic,black_x1.pic_add);
+    lv_obj_add_flag(black_x1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_x1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_x2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_x2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_x2.x,45-30+65*black_x2.y);
+    lv_image_set_src(black_x2.pic,black_x2.pic_add);
+    lv_obj_add_flag(black_x2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_x2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_s1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_s1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_s1.x,45-30+65*black_s1.y);
+    lv_image_set_src(black_s1.pic,black_s1.pic_add);
+    lv_obj_add_flag(black_s1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_s1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_s2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_s2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_s2.x,45-30+65*black_s2.y);
+    lv_image_set_src(black_s2.pic,black_s2.pic_add);
+    lv_obj_add_flag(black_s2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_s2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_j.pic = lv_image_create(game_ui);
+    lv_obj_align(black_j.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_j.x,45-30+65*black_j.y);
+    lv_image_set_src(black_j.pic,black_j.pic_add);
+    lv_obj_add_flag(black_j.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_j.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_p1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_p1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_p1.x,45-30+65*black_p1.y);
+    lv_image_set_src(black_p1.pic,black_p1.pic_add);
+    lv_obj_add_flag(black_p1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_p1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_p2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_p2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_p2.x,45-30+65*black_p2.y);
+    lv_image_set_src(black_p2.pic,black_p2.pic_add);
+    lv_obj_add_flag(black_p2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_p2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_b1.pic = lv_image_create(game_ui);
+    lv_obj_align(black_b1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_b1.x,45-30+65*black_b1.y);
+    lv_image_set_src(black_b1.pic,black_b1.pic_add);
+    lv_obj_add_flag(black_b1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_b1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_b2.pic = lv_image_create(game_ui);
+    lv_obj_align(black_b2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_b2.x,45-30+65*black_b2.y);
+    lv_image_set_src(black_b2.pic,black_b2.pic_add);
+    lv_obj_add_flag(black_b2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_b2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+    
+    black_b3.pic = lv_image_create(game_ui);
+    lv_obj_align(black_b3.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_b3.x,45-30+65*black_b3.y);
+    lv_image_set_src(black_b3.pic,black_b3.pic_add);
+    lv_obj_add_flag(black_b3.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_b3.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_b4.pic = lv_image_create(game_ui);
+    lv_obj_align(black_b4.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_b4.x,45-30+65*black_b4.y);
+    lv_image_set_src(black_b4.pic,black_b4.pic_add);
+    lv_obj_add_flag(black_b4.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_b4.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    black_b5.pic = lv_image_create(game_ui);
+    lv_obj_align(black_b5.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*black_b5.x,45-30+65*black_b5.y);
+    lv_image_set_src(black_b5.pic,black_b5.pic_add);
+    lv_obj_add_flag(black_b5.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(black_b5.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+
+
+
+    red_c1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_c1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_c1.x,45-30+65*red_c1.y);
+    lv_image_set_src(red_c1.pic,red_c1.pic_add);
+    lv_obj_add_flag(red_c1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_c1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_c2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_c2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_c2.x,45-30+65*red_c2.y);
+    lv_image_set_src(red_c2.pic,red_c2.pic_add);
+    lv_obj_add_flag(red_c2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_c2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_m1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_m1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_m1.x,45-30+65*red_m1.y);
+    lv_image_set_src(red_m1.pic,red_m1.pic_add);
+    lv_obj_add_flag(red_m1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_m1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_m2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_m2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_m2.x,45-30+65*red_m2.y);
+    lv_image_set_src(red_m2.pic,red_m2.pic_add);
+    lv_obj_add_flag(red_m2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_m2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_x1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_x1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_x1.x,45-30+65*red_x1.y);
+    lv_image_set_src(red_x1.pic,red_x1.pic_add);
+    lv_obj_add_flag(red_x1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_x1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_x2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_x2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_x2.x,45-30+65*red_x2.y);
+    lv_image_set_src(red_x2.pic,red_x2.pic_add);
+    lv_obj_add_flag(red_x2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_x2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_s1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_s1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_s1.x,45-30+65*red_s1.y);
+    lv_image_set_src(red_s1.pic,red_s1.pic_add);
+    lv_obj_add_flag(red_s1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_s1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_s2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_s2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_s2.x,45-30+65*red_s2.y);
+    lv_image_set_src(red_s2.pic,red_s2.pic_add);
+    lv_obj_add_flag(red_s2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_s2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_s.pic = lv_image_create(game_ui);
+    lv_obj_align(red_s.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_s.x,45-30+65*red_s.y);
+    lv_image_set_src(red_s.pic,red_s.pic_add);
+    lv_obj_add_flag(red_s.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_s.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_p1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_p1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_p1.x,45-30+65*red_p1.y);
+    lv_image_set_src(red_p1.pic,red_p1.pic_add);
+    lv_obj_add_flag(red_p1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_p1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_p2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_p2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_p2.x,45-30+65*red_p2.y);
+    lv_image_set_src(red_p2.pic,red_p2.pic_add);
+    lv_obj_add_flag(red_p2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_p2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_b1.pic = lv_image_create(game_ui);
+    lv_obj_align(red_b1.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_b1.x,45-30+65*red_b1.y);
+    lv_image_set_src(red_b1.pic,red_b1.pic_add);
+    lv_obj_add_flag(red_b1.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_b1.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_b2.pic = lv_image_create(game_ui);
+    lv_obj_align(red_b2.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_b2.x,45-30+65*red_b2.y);
+    lv_image_set_src(red_b2.pic,red_b2.pic_add);
+    lv_obj_add_flag(red_b2.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_b2.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+    
+    red_b3.pic = lv_image_create(game_ui);
+    lv_obj_align(red_b3.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_b3.x,45-30+65*red_b3.y);
+    lv_image_set_src(red_b3.pic,red_b3.pic_add);
+    lv_obj_add_flag(red_b3.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_b3.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_b4.pic = lv_image_create(game_ui);
+    lv_obj_align(red_b4.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_b4.x,45-30+65*red_b4.y);
+    lv_image_set_src(red_b4.pic,red_b4.pic_add);
+    lv_obj_add_flag(red_b4.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_b4.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    red_b5.pic = lv_image_create(game_ui);
+    lv_obj_align(red_b5.pic,LV_ALIGN_TOP_LEFT,182+36-30+65*red_b5.x,45-30+65*red_b5.y);
+    lv_image_set_src(red_b5.pic,red_b5.pic_add);
+    lv_obj_add_flag(red_b5.pic, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(red_b5.pic,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+    lv_obj_add_event_cb(button_q,button_q_callback,LV_EVENT_CLICKED,NULL);
+
+    lv_obj_add_event_cb(game_ui,qizi_event_handler,LV_EVENT_CLICKED,NULL);
+
+
+
+    undo_btn = lv_btn_create(game_ui);
+    lv_obj_set_size(undo_btn, 100, 100);
+    lv_obj_set_pos(undo_btn, 850, 100);
+    lv_obj_add_style(undo_btn, &game_style, 0);
+    // undo_label = lv_label_create(undo_btn);
+    // lv_label_set_text(undo_label, "regret");
+    // lv_obj_center(undo_label);
+    undo_label = lv_image_create(undo_btn);
+    lv_obj_align(undo_label,LV_ALIGN_CENTER,0,0);
+    lv_image_set_src(undo_label,"A:./pic/huiqi.png");
+    
+    // 悔棋按钮回调
+    lv_obj_add_event_cb(undo_btn, undo_btn_event_cb, LV_EVENT_CLICKED, NULL);
+
+    
+    // 添加重做按钮
+    redo_btn = lv_btn_create(game_ui);
+    lv_obj_set_size(redo_btn, 80, 40);
+    lv_obj_set_pos(redo_btn, 850, 250);
+    redo_label = lv_label_create(redo_btn);
+    lv_label_set_text(redo_label, "Start over");
+    lv_obj_center(redo_label);
+    
+    // 重做按钮回调
+    lv_obj_add_event_cb(redo_btn, redo_btn_event_cb, LV_EVENT_CLICKED, NULL);
+
+}
+
+
+static void undo_btn_event_cb(lv_event_t * e) 
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_CLICKED) 
+    {
+        undo_move();
+    }
+}
+
+// 重做按钮回调函数
+static void redo_btn_event_cb(lv_event_t * e) 
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_CLICKED) 
+    {
+        redo_move();
+    }
+}
+
+
+
+void record_move(Qizi* piece, int from_x, int from_y, int to_x, int to_y, Qizi* captured) {
+    if (move_count >= 500) 
+    {
+        printf("移动历史已满，无法记录更多步数\n");
+        return;
+    }
+    
+    // 如果当前不是最新步数，删除后面的历史
+    if (current_move < move_count) 
+    {
+        move_count = current_move;
+    }
+    
+    // 记录移动
+    move_history[move_count].piece = piece;
+    move_history[move_count].from_x = from_x;
+    move_history[move_count].from_y = from_y;
+    move_history[move_count].to_x = to_x;
+    move_history[move_count].to_y = to_y;
+    move_history[move_count].captured = captured;
+    
+    if (captured) 
+    {
+        move_history[move_count].captured_live = captured->live;
+    } 
+    else 
+    {
+        move_history[move_count].captured_live = 1; // 默认存活
+    }
+    
+    move_count++;
+    current_move = move_count;
+    
+    printf("记录移动: %s 从 (%d,%d) 到 (%d,%d)\n", 
+           piece->type == QZ_J ? "将" : 
+           piece->type == QZ_S ? "士" :
+           piece->type == QZ_X ? "相" :
+           piece->type == QZ_C ? "车" :
+           piece->type == QZ_M ? "马" :
+           piece->type == QZ_P ? "炮" : "兵",
+           from_x, from_y, to_x, to_y);
+}
+
+// 悔棋功能
+void undo_move(void) 
+{
+    if (current_move <= 0) 
+    {
+        printf("没有可悔棋的步数\n");
+        return;
+    }
+    
+    current_move--;
+    MoveHistory* move = &move_history[current_move];
+    
+    // 恢复棋盘状态
+    chessboard[move->to_x][move->to_y] = NULL;
+    chessboard[move->from_x][move->from_y] = move->piece;
+    
+    // 恢复棋子位置
+    move->piece->x = move->from_x;
+    move->piece->y = move->from_y;
+    
+    // 更新LVGL对象位置
+    lv_obj_set_pos(move->piece->pic, 
+                  182 + 36 - 30 + 65 * move->from_x, 
+                  45 - 30 + 65 * move->from_y);
+    
+    // 如果有被吃的棋子，恢复它
+    if (move->captured != NULL) 
+    {
+        move->captured->live = move->captured_live;
+        chessboard[move->to_x][move->to_y] = move->captured;
+        
+        // 显示被吃的棋子
+        if (move->captured->pic) 
+        {
+            lv_obj_clear_flag(move->captured->pic, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+    
+    // 切换玩家
+    player = (player == RED) ? BLACK : RED;
+    
+    printf("悔棋成功，当前玩家: %s\n", (player == RED) ? "红方" : "黑方");
+    
+    // 更新悔棋/重做按钮状态
+    update_undo_redo_buttons();
+}
+
+// 重做功能
+void redo_move(void) {
+    if (current_move >= move_count) 
+    {
+        printf("没有可重做的步数\n");
+        return;
+    }
+    
+    MoveHistory* move = &move_history[current_move];
+    
+    // 执行移动
+    chessboard[move->from_x][move->from_y] = NULL;
+    chessboard[move->to_x][move->to_y] = move->piece;
+    
+    // 更新棋子位置
+    move->piece->x = move->to_x;
+    move->piece->y = move->to_y;
+    
+    // 更新LVGL对象位置
+    lv_obj_set_pos(move->piece->pic, 
+                  182 + 36 - 30 + 65 * move->to_x, 
+                  45 - 30 + 65 * move->to_y);
+    
+    // 如果有被吃的棋子，隐藏它
+    if (move->captured != NULL) 
+    {
+        move->captured->live = 0;
+        if (move->captured->pic) 
+        {
+            lv_obj_add_flag(move->captured->pic, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+    
+    current_move++;
+    
+    // 切换玩家
+    player = (player == RED) ? BLACK : RED;
+    
+    
+    printf("重做成功，当前玩家: %s\n", (player == RED) ? "红方" : "黑方");
+    
+    // 更新悔棋/重做按钮状态
+    update_undo_redo_buttons();
+}
+
+// 更新悔棋/重做按钮状态
+void update_undo_redo_buttons(void) 
+{
+    if (undo_btn == NULL || redo_btn == NULL) 
+    {
+        return; // 按钮尚未创建
+    }
+    
+    // 更新悔棋按钮状态
+    if (current_move > 0) 
+    {
+        // 有悔棋步骤可用，启用按钮
+        lv_obj_clear_state(undo_btn, LV_STATE_DISABLED);
+        lv_obj_set_style_opa(undo_btn, LV_OPA_100, 0);
+        if (undo_label) 
+        {
+            lv_obj_set_style_text_opa(undo_label, LV_OPA_100, 0);
+        }
+    } 
+    else 
+    {
+        // 没有悔棋步骤可用，禁用按钮
+        lv_obj_add_state(undo_btn, LV_STATE_DISABLED);
+        lv_obj_set_style_opa(undo_btn, LV_OPA_50, 0);
+        if (undo_label) 
+        {
+            lv_obj_set_style_text_opa(undo_label, LV_OPA_50, 0);
+        }
+    }
+    
+    // 更新重做按钮状态
+    if (current_move < move_count) 
+    {
+        // 有重做步骤可用，启用按钮
+        lv_obj_clear_state(redo_btn, LV_STATE_DISABLED);
+        lv_obj_set_style_opa(redo_btn, LV_OPA_100, 0);
+        if (redo_label) 
+        {
+            lv_obj_set_style_text_opa(redo_label, LV_OPA_100, 0);
+        }
+    } 
+    else 
+    {
+        // 没有重做步骤可用，禁用按钮
+        lv_obj_add_state(redo_btn, LV_STATE_DISABLED);
+        lv_obj_set_style_opa(redo_btn, LV_OPA_50, 0);
+        if (redo_label) 
+        {
+            lv_obj_set_style_text_opa(redo_label, LV_OPA_50, 0);
+        }
+    }
+}
+
+
+

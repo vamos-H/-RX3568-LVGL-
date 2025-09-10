@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"/mnt/hgfs/share/xuexi/demo/build/cmake_install.cmake",
+		"/mnt/hgfs/share/xuexi/demo/build/lvgl/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
