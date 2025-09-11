@@ -6,29 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/mnt/hgfs/share/xuexi/demo/lv_conf.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h
 
-/mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.S
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.S
 lv_blend_neon.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.h
 
-/mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/neon/lv_blend_neon.h
 ../../../../lv_conf_internal.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/lv_conf_internal.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/lv_conf_internal.h
 
-/mnt/hgfs/share/xuexi/demo/lvgl/src/lv_conf_internal.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/lv_conf_internal.h
 lv_conf_kconfig.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/lv_conf_kconfig.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/lv_conf_kconfig.h
 lv_conf.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/lv_conf.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/lv_conf.h
 ../../lv_conf.h
-/mnt/hgfs/share/xuexi/demo/lv_conf.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h
 
-/mnt/hgfs/share/xuexi/demo/lvgl/src/lv_conf_kconfig.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/lv_conf_kconfig.h
 sdkconfig.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/sdkconfig.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/sdkconfig.h
 esp_attr.h
-/mnt/hgfs/share/xuexi/demo/lvgl/src/esp_attr.h
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/esp_attr.h
 nuttx/config.h
 -
 lv_rt_thread_conf.h

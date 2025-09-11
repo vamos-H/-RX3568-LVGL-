@@ -1,5 +1,5 @@
 lvgl/CMakeFiles/lvgl.dir/src/libs/qrcode/qrcodegen.c.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/qrcodegen.c \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/qrcodegen.c \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include-fixed/limits.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include-fixed/syslimits.h \
@@ -43,17 +43,17 @@ lvgl/CMakeFiles/lvgl.dir/src/libs/qrcode/qrcodegen.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/stdlib-float.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/string.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/xlocale.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/qrcodegen.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/qrcodegen.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdbool.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/wchar.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lv_conf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/lv_mem.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/../misc/lv_types.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/lv_mem.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/qrcode/../../misc/../stdlib/../misc/lv_types.h

@@ -1,13 +1,13 @@
 lvgl/CMakeFiles/lvgl.dir/src/misc/cache/lv_cache_entry.c.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_cache_entry.c \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_cache_entry.c \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_cache_entry.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lv_conf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_cache_entry.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/../misc/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/libc-header-start.h \
@@ -21,9 +21,9 @@ lvgl/CMakeFiles/lvgl.dir/src/misc/cache/lv_cache_entry.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/typesizes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/wchar.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stddef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../osal/lv_os_none.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_cache_private.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../osal/lv_os_none.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_cache_private.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdbool.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdlib.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/waitflags.h \
@@ -48,19 +48,19 @@ lvgl/CMakeFiles/lvgl.dir/src/misc/cache/lv_cache_entry.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/pthreadtypes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/alloca.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/stdlib-float.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../stdlib/lv_sprintf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../stdlib/lv_sprintf.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/inttypes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdarg.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../stdlib/lv_mem.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../stdlib/lv_mem.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../stdlib/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/string.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/xlocale.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/../../stdlib/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/_lv_cache_lru_rb.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_image_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/misc/cache/lv_cache_entry_private.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/../../stdlib/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/_lv_cache_lru_rb.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_image_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/misc/cache/lv_cache_entry_private.h

@@ -1,12 +1,12 @@
 lvgl/CMakeFiles/lvgl.dir/src/osal/lv_cmsis_rtos2.c.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/lv_cmsis_rtos2.c \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/lv_cmsis_rtos2.c \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lv_conf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/../misc/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/libc-header-start.h \
@@ -20,4 +20,4 @@ lvgl/CMakeFiles/lvgl.dir/src/osal/lv_cmsis_rtos2.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/typesizes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/wchar.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stddef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/osal/lv_os_none.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/osal/lv_os_none.h

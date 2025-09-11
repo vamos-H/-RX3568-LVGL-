@@ -1,10 +1,10 @@
 lvgl/CMakeFiles/lvgl.dir/src/font/lv_font.c.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/lv_font.c \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/lv_font.c \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/lv_font.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/lv_font.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/libc-header-start.h \
@@ -19,36 +19,36 @@ lvgl/CMakeFiles/lvgl.dir/src/font/lv_font.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/wchar.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stddef.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdbool.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/lv_symbol_def.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/lv_draw_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/../stdlib/lv_mem.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/lv_symbol_def.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/lv_draw_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/../stdlib/lv_mem.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/../stdlib/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/string.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/xlocale.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/../stdlib/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_math.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_palette.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../misc/lv_color_op.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/lv_image_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../stdlib/lv_string.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../draw/../stdlib/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/lv_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/lv_cache_entry.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/../../osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/../../osal/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/../../osal/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/../../osal/lv_os_none.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/../lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/lv_cache_private.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/../stdlib/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_math.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_palette.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../misc/lv_color_op.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/lv_image_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../stdlib/lv_string.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../draw/../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/lv_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/lv_cache_entry.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/../../osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/../../osal/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/../../osal/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/../../osal/lv_os_none.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/../lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/lv_cache_private.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdlib.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/waitflags.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/waitstatus.h \
@@ -72,17 +72,17 @@ lvgl/CMakeFiles/lvgl.dir/src/font/lv_font.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/pthreadtypes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/alloca.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/stdlib-float.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/_lv_cache_lru_rb.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/cache/lv_image_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_text.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/_lv_cache_lru_rb.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/cache/lv_image_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_text.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdarg.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/../font/lv_font.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/../stdlib/lv_sprintf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/../font/lv_font.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/../stdlib/lv_sprintf.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/inttypes.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_utils.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../misc/lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/font/../stdlib/lv_string.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_utils.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../misc/lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/font/../stdlib/lv_string.h

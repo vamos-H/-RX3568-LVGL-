@@ -1,13 +1,13 @@
 lvgl/CMakeFiles/lvgl.dir/src/draw/sw/lv_draw_sw_arc.c.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/lv_draw_sw_arc.c \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/lv_draw_sw_arc.c \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/lv_draw_sw.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lv_conf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/lv_draw_sw.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdint.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/libc-header-start.h \
@@ -20,41 +20,41 @@ lvgl/CMakeFiles/lvgl.dir/src/draw/sw/lv_draw_sw_arc.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/types.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/typesizes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/wchar.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_style.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_style.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdbool.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/lv_font.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/lv_font.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stddef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/lv_symbol_def.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/lv_draw_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/lv_mem.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/lv_symbol_def.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/lv_draw_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/lv_mem.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/../lv_conf_internal.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/string.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/xlocale.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_math.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_palette.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color_op.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/lv_image_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../stdlib/lv_string.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../stdlib/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache_entry.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/lv_os_none.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache_private.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/../stdlib/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_math.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_palette.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../misc/lv_color_op.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/lv_image_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../stdlib/lv_string.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../draw/../stdlib/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache_entry.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../../osal/lv_os_none.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/../lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_cache_private.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdlib.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/waitflags.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/waitstatus.h \
@@ -78,79 +78,79 @@ lvgl/CMakeFiles/lvgl.dir/src/draw/sw/lv_draw_sw_arc.c.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/pthreadtypes.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/alloca.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/bits/stdlib-float.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/_lv_cache_lru_rb.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_image_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_anim.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_math.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_timer.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../tick/lv_tick.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../tick/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_ll.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_text.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/_lv_cache_lru_rb.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../font/../misc/cache/lv_image_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_anim.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_math.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_timer.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../tick/lv_tick.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../tick/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_ll.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_text.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/lib/gcc/aarch64-linux-gnu/7.5.0/include/stdarg.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../stdlib/lv_sprintf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../stdlib/lv_sprintf.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/inttypes.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_assert.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_bidi.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/lv_layout.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/lv_flex.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/lv_grid.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_style_gen.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_text.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_profiler.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_image_decoder.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_fs.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/cache/lv_cache.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_rect.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../sw/lv_draw_sw_gradient.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../sw/../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../sw/../../misc/lv_style.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_label.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_bidi.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_image.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_image_buf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_arc.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_line.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_triangle.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../lv_draw_mask.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/lv_display.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_timer.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_event.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_types.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_array.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../display/../draw/lv_draw.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../osal/lv_os.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../draw/lv_draw_vector.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../draw/lv_draw.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../draw/../misc/lv_array.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/lv_draw_sw_blend.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../lv_draw_sw_mask.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_math.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_color.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_area.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/blend/../../../misc/lv_style.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_math.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../misc/lv_log.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../stdlib/lv_mem.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/draw/sw/../../stdlib/lv_string.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_assert.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_bidi.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/lv_layout.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/lv_flex.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/flex/../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/lv_grid.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/../layouts/grid/../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_style_gen.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_text.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_profiler.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_image_decoder.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_fs.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/cache/lv_cache.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_rect.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../sw/lv_draw_sw_gradient.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../sw/../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../sw/../../misc/lv_style.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_label.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_bidi.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_image.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_image_buf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_arc.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_line.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_triangle.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../lv_draw_mask.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/lv_display.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_timer.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_event.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_types.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_array.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../display/../draw/lv_draw.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../osal/lv_os.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../draw/lv_draw_vector.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../draw/lv_draw.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../draw/../misc/lv_array.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/lv_draw_sw_blend.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../lv_draw_sw_mask.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_math.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_color.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_area.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/blend/../../../misc/lv_style.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_math.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../misc/lv_log.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../stdlib/lv_mem.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/draw/sw/../../stdlib/lv_string.h

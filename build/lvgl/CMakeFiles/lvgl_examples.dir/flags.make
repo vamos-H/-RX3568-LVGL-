@@ -4,7 +4,7 @@
 # compile C with /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
 C_DEFINES = -DLV_CONF_INCLUDE_SIMPLE -DLV_LVGL_H_INCLUDE_SIMPLE
 
-C_INCLUDES = -I/mnt/hgfs/share/xuexi/demo -isystem /mnt/hgfs/share/xuexi/demo/lvgl/examples -isystem /mnt/hgfs/share/xuexi/demo/lvgl
+C_INCLUDES = -I/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo -isystem /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/examples -isystem /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl
 
 C_FLAGS = -std=gnu99
 

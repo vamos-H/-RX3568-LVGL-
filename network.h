@@ -34,7 +34,7 @@ typedef struct {
 } NetworkMessage;       // 网络消息结构
 
 // 函数声明
-int network_init(NetworkState* net, NetworkMode mode, const char* ip);
+int network_init(NetworkState* net, NetworkMode mode, const char* ip,const char* port) ;
 void network_cleanup(NetworkState* net);
 int network_send(NetworkState* net, const NetworkMessage* msg);
 int network_receive(NetworkState* net, NetworkMessage* msg);

@@ -1,9 +1,9 @@
 lvgl/CMakeFiles/lvgl_thorvg.dir/src/libs/thorvg/tvgSvgPath.cpp.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgSvgPath.cpp \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgSvgPath.cpp \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../../../lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../../../lv_conf.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/cstring \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/aarch64-linux-gnu/bits/c++config.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/aarch64-linux-gnu/bits/os_defines.h \
@@ -92,10 +92,10 @@ lvgl/CMakeFiles/lvgl_thorvg.dir/src/libs/thorvg/tvgSvgPath.cpp.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/tr1/poly_laguerre.tcc \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/tr1/riemann_zeta.tcc \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/ctype.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgSvgLoaderCommon.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgCommon.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/config.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/thorvg.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgSvgLoaderCommon.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgCommon.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/config.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/thorvg.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/functional \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/bits/stl_function.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/backward/binders.h \
@@ -210,8 +210,8 @@ lvgl/CMakeFiles/lvgl_thorvg.dir/src/libs/thorvg/tvgSvgPath.cpp.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/list \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/bits/stl_list.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/bits/list.tcc \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgArray.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgArray.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/memory.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgSvgPath.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgStr.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgSvgPath.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgStr.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/cstddef

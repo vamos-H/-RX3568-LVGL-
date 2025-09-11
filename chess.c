@@ -5,10 +5,11 @@
 #include <stdio.h>
 #include "chess.h"
 
-
 lv_obj_t *main_ui = NULL;
 lv_obj_t *game_ui = NULL;
 lv_obj_t *over_ui = NULL;
+
+NetworkState network;
 
 lv_obj_t *chi_image_obj = NULL;       // 全局指针，指向“吃子”图片对象
 lv_timer_t *chi_hide_timer = NULL; 
@@ -97,7 +98,7 @@ void button_s_callback(lv_event_t *e)
 }
 
 
-void main_screen(void)
+void main_screen(NetworkConfig net_config)
 {
     
     main_ui = lv_obj_create(lv_screen_active());
@@ -134,6 +135,26 @@ void main_screen(void)
     lv_image_set_src(buttonA_image, "A:./pic/start_game.png");
 
     lv_obj_add_event_cb(button_s, button_s_callback, LV_EVENT_CLICKED, NULL);
+
+    // 创建网络对战按钮
+    lv_obj_t* button_net = lv_button_create(main_ui);
+    lv_obj_set_size(button_net, 81, 230);
+    lv_obj_align(button_net, LV_ALIGN_CENTER, 100, 0);
+    
+    // 设置按钮样式
+    static lv_style_t buttonNet_style;
+    lv_style_init(&buttonNet_style);
+    lv_style_set_pad_all(&buttonNet_style, 0);
+    lv_style_set_border_width(&buttonNet_style, 0);
+    lv_style_set_bg_color(&buttonNet_style, lv_color_hex(0x00E3AD75));
+    lv_obj_add_style(button_net, &buttonNet_style, 0);
+    
+    // 在按键上创建一个图片控件
+    lv_obj_t *buttonNet_image = lv_image_create(button_net);
+    lv_image_set_src(buttonNet_image, "A:./pic/network_game.png");
+    
+    // 添加网络对战回调
+    lv_obj_add_event_cb(button_net, button_net_callback, LV_EVENT_CLICKED, &net_config);
 
 
     
@@ -808,6 +829,17 @@ void move_qizi(Qizi* qizi, int target_x, int target_y)
     int from_y = qizi->y;
     Qizi* captured = NULL;
 
+    if ((network.connected && network.mode == NETWORK_MODE_SERVER && player == RED)||(network.connected && network.mode == NETWORK_MODE_CLIENT && player == BLACK)) {
+        
+        NetworkMessage msg;
+        msg.type = MSG_MOVE;
+        msg.data[0] = from_x;
+        msg.data[1] = from_y;
+        msg.data[2] = target_x;
+        msg.data[3] = target_y;
+        
+        network_send(&network, &msg);
+    }
 
     if(chessboard[target_x][target_y]!=NULL && chessboard[target_x][target_y]->live==1)
     {
@@ -1451,3 +1483,128 @@ void update_undo_redo_buttons(void)
 
 
 
+void button_net_callback(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    NetworkConfig *config = lv_event_get_user_data(e);
+    if(code == LV_EVENT_CLICKED) {
+        // 显示网络选择界面
+        show_network_selection(config);
+    }
+}
+
+// 显示网络选择界面
+void show_network_selection(NetworkConfig *config) {
+    // 创建网络选择界面
+    lv_obj_t *net_ui = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(net_ui, 400, 300);
+    lv_obj_align(net_ui, LV_ALIGN_CENTER, 0, 0);
+    
+    // 添加服务器按钮
+    lv_obj_t *server_btn = lv_btn_create(net_ui);
+    lv_obj_set_size(server_btn, 150, 50);
+    lv_obj_align(server_btn, LV_ALIGN_CENTER, 0, -50);
+    lv_obj_t *server_label = lv_label_create(server_btn);
+    lv_label_set_text(server_label, "RED");
+    lv_obj_center(server_label);
+    lv_obj_add_event_cb(server_btn, server_btn_callback, LV_EVENT_CLICKED, config);
+    
+    // 添加客户端按钮
+    lv_obj_t *client_btn = lv_btn_create(net_ui);
+    lv_obj_set_size(client_btn, 150, 50);
+    lv_obj_align(client_btn, LV_ALIGN_CENTER, 0, 50);
+    lv_obj_t *client_label = lv_label_create(client_btn);
+    lv_label_set_text(client_label, "BLACK");
+    lv_obj_center(client_label);
+    lv_obj_add_event_cb(client_btn, client_btn_callback, LV_EVENT_CLICKED, config);
+}
+
+// 服务器按钮回调
+void server_btn_callback(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    NetworkConfig *config = lv_event_get_user_data(e);
+    if(code == LV_EVENT_CLICKED) {
+        // 初始化网络为服务器模式
+        if (network_init(&network, NETWORK_MODE_SERVER, config->ip,config->port) == 0) {
+            player = RED; // 服务器执红先手
+            qizi_init();
+            game_screen();
+            lv_obj_add_flag(main_ui, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+// 客户端按钮回调
+void client_btn_callback(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    NetworkConfig *config = lv_event_get_user_data(e);
+    if(code == LV_EVENT_CLICKED) {
+        
+        // 初始化网络为客户端模式
+        if (network_init(&network, NETWORK_MODE_CLIENT, config->ip,config->port) == 0) {
+            player = BLACK; // 客户端执黑后手
+            qizi_init();
+            game_screen();
+            lv_obj_add_flag(main_ui, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
+}
+
+
+
+
+void process_network_message(const NetworkMessage* msg) {
+    switch (msg->type) {
+        case MSG_MOVE: {
+            // 处理移动消息
+            int from_x = msg->data[0];
+            int from_y = msg->data[1];
+            int to_x = msg->data[2];
+            int to_y = msg->data[3];
+            
+            Qizi* qizi = chessboard[from_x][from_y];
+            if (qizi && qizi->live) {
+                // 执行移动
+                move_qizi(qizi, to_x, to_y);
+                
+                // 切换玩家
+                player = (player == RED) ? BLACK : RED;
+            }
+            break;
+        }
+        
+        case MSG_UNDO_REQUEST:
+            // 处理悔棋请求
+            //show_undo_request_dialog();
+            break;
+            
+        case MSG_UNDO_RESPONSE:
+            // 处理悔棋响应
+            if (msg->data[0] == 1) { // 同意悔棋
+                //undo_move();
+            }
+            break;
+            
+        case MSG_RESTART:
+            // 重新开始游戏
+            qizi_init();
+            lv_obj_clean(game_ui);
+            game_screen();
+            break;
+            
+        case MSG_QUIT:
+            // 退出游戏
+            printf("对方已退出游戏\n");
+            network.connected = 0;
+            break;
+            
+        case MSG_CHAT:
+            // 显示聊天消息
+            //show_chat_message(msg->text);
+            break;
+            
+        default:
+            break;
+    }
+}

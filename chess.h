@@ -4,6 +4,13 @@
 #include "lvgl/lvgl.h"
 #include "lvgl/demos/lv_demos.h"
 #include "xiangqi.h"
+#include "network.h"
+
+typedef struct 
+{
+    char ip[20];        // IP地址
+    char port[10];       // 端口号
+} NetworkConfig;
 
 extern lv_obj_t *main_ui ;
 extern lv_obj_t *game_ui ;
@@ -25,7 +32,7 @@ void init_screen_click() ;
 
 void button_s_callback(lv_event_t *e);
 
-void main_screen(void);
+void main_screen(NetworkConfig net_config);
 
 void button_q_callback(lv_event_t *e);
 
@@ -82,5 +89,21 @@ void update_undo_redo_buttons(void);
 
 static void undo_btn_event_cb(lv_event_t * e) ;
 static void redo_btn_event_cb(lv_event_t * e) ;
+
+
+
+void button_net_callback(lv_event_t *e);
+
+void show_network_selection(NetworkConfig *config);
+
+void server_btn_callback(lv_event_t *e);
+
+void client_btn_callback(lv_event_t *e);
+
+void show_ip_input_dialog(void);
+
+void connect_btn_callback(lv_event_t *e);
+
+void process_network_message(const NetworkMessage* msg);
 
 #endif

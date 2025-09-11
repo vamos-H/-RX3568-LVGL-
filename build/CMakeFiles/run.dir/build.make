@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1479/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1481/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1479/bin/cmake -E rm -f
+RM = /snap/cmake/1481/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/hgfs/share/xuexi/demo
+CMAKE_SOURCE_DIR = /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/hgfs/share/xuexi/demo/build
+CMAKE_BINARY_DIR = /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build
 
 # Utility rule file for run.
 
@@ -66,8 +66,8 @@ include CMakeFiles/run.dir/compiler_depend.make
 # Include the progress variables for this target.
 include CMakeFiles/run.dir/progress.make
 
-CMakeFiles/run: /mnt/hgfs/share/xuexi/demo/bin/main
-	/mnt/hgfs/share/xuexi/demo/bin/main
+CMakeFiles/run: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main
+	/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main
 
 CMakeFiles/run.dir/codegen:
 .PHONY : CMakeFiles/run.dir/codegen
@@ -85,6 +85,6 @@ CMakeFiles/run.dir/clean:
 .PHONY : CMakeFiles/run.dir/clean
 
 CMakeFiles/run.dir/depend:
-	cd /mnt/hgfs/share/xuexi/demo/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hgfs/share/xuexi/demo /mnt/hgfs/share/xuexi/demo /mnt/hgfs/share/xuexi/demo/build /mnt/hgfs/share/xuexi/demo/build /mnt/hgfs/share/xuexi/demo/build/CMakeFiles/run.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles/run.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/run.dir/depend
 

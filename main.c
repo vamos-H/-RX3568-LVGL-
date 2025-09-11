@@ -11,7 +11,7 @@
 
 
 
-int main(void)
+int main(int argc, char **argv)
 {
     lv_init();
 
@@ -20,11 +20,19 @@ int main(void)
     lv_linux_fbdev_set_file(disp, "/dev/fb0");
     lv_indev_t * indev = lv_evdev_create(LV_INDEV_TYPE_POINTER, "/dev/input/event6");
 
-    //main_screen();
-
+    NetworkConfig net_config;
+    memset(&net_config, 0, sizeof(NetworkConfig));
+    if (argc == 3) {
+        // 从命令行参数获取IP和端口
+        strncpy(net_config.ip, argv[1], sizeof(net_config.ip) - 1);
+        strncpy(net_config.port, argv[2], sizeof(net_config.port) - 1);
+    } else {
+        perror("Usage: ./chess <IP> <Port>\n");
+        return -1;
+    }
     
     game_screen();
-    main_screen();
+    main_screen(net_config);
 
     /*Handle LVGL tasks*/
     while(1) {

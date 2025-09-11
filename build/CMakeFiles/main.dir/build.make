@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1479/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1481/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1479/bin/cmake -E rm -f
+RM = /snap/cmake/1481/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/hgfs/share/xuexi/demo
+CMAKE_SOURCE_DIR = /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/hgfs/share/xuexi/demo/build
+CMAKE_BINARY_DIR = /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/main.dir/depend.make
@@ -73,87 +73,103 @@ CMakeFiles/main.dir/codegen:
 .PHONY : CMakeFiles/main.dir/codegen
 
 CMakeFiles/main.dir/main.c.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/main.c.o: /mnt/hgfs/share/xuexi/demo/main.c
+CMakeFiles/main.dir/main.c.o: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/main.c
 CMakeFiles/main.dir/main.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/main.dir/main.c.o"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/main.c.o -MF CMakeFiles/main.dir/main.c.o.d -o CMakeFiles/main.dir/main.c.o -c /mnt/hgfs/share/xuexi/demo/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/main.dir/main.c.o"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/main.c.o -MF CMakeFiles/main.dir/main.c.o.d -o CMakeFiles/main.dir/main.c.o -c /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/main.c
 
 CMakeFiles/main.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/main.c.i"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/demo/main.c > CMakeFiles/main.dir/main.c.i
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/main.c > CMakeFiles/main.dir/main.c.i
 
 CMakeFiles/main.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/main.c.s"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/demo/main.c -o CMakeFiles/main.dir/main.c.s
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/main.c -o CMakeFiles/main.dir/main.c.s
 
 CMakeFiles/main.dir/mouse_cursor_icon.c.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/mouse_cursor_icon.c.o: /mnt/hgfs/share/xuexi/demo/mouse_cursor_icon.c
+CMakeFiles/main.dir/mouse_cursor_icon.c.o: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/mouse_cursor_icon.c
 CMakeFiles/main.dir/mouse_cursor_icon.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/main.dir/mouse_cursor_icon.c.o"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/mouse_cursor_icon.c.o -MF CMakeFiles/main.dir/mouse_cursor_icon.c.o.d -o CMakeFiles/main.dir/mouse_cursor_icon.c.o -c /mnt/hgfs/share/xuexi/demo/mouse_cursor_icon.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/main.dir/mouse_cursor_icon.c.o"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/mouse_cursor_icon.c.o -MF CMakeFiles/main.dir/mouse_cursor_icon.c.o.d -o CMakeFiles/main.dir/mouse_cursor_icon.c.o -c /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/mouse_cursor_icon.c
 
 CMakeFiles/main.dir/mouse_cursor_icon.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/mouse_cursor_icon.c.i"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/demo/mouse_cursor_icon.c > CMakeFiles/main.dir/mouse_cursor_icon.c.i
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/mouse_cursor_icon.c > CMakeFiles/main.dir/mouse_cursor_icon.c.i
 
 CMakeFiles/main.dir/mouse_cursor_icon.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/mouse_cursor_icon.c.s"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/demo/mouse_cursor_icon.c -o CMakeFiles/main.dir/mouse_cursor_icon.c.s
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/mouse_cursor_icon.c -o CMakeFiles/main.dir/mouse_cursor_icon.c.s
 
 CMakeFiles/main.dir/chess.c.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/chess.c.o: /mnt/hgfs/share/xuexi/demo/chess.c
+CMakeFiles/main.dir/chess.c.o: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.c
 CMakeFiles/main.dir/chess.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/main.dir/chess.c.o"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/chess.c.o -MF CMakeFiles/main.dir/chess.c.o.d -o CMakeFiles/main.dir/chess.c.o -c /mnt/hgfs/share/xuexi/demo/chess.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/main.dir/chess.c.o"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/chess.c.o -MF CMakeFiles/main.dir/chess.c.o.d -o CMakeFiles/main.dir/chess.c.o -c /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.c
 
 CMakeFiles/main.dir/chess.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/chess.c.i"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/demo/chess.c > CMakeFiles/main.dir/chess.c.i
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.c > CMakeFiles/main.dir/chess.c.i
 
 CMakeFiles/main.dir/chess.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/chess.c.s"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/demo/chess.c -o CMakeFiles/main.dir/chess.c.s
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.c -o CMakeFiles/main.dir/chess.c.s
 
 CMakeFiles/main.dir/xiangqi.c.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/xiangqi.c.o: /mnt/hgfs/share/xuexi/demo/xiangqi.c
+CMakeFiles/main.dir/xiangqi.c.o: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/xiangqi.c
 CMakeFiles/main.dir/xiangqi.c.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/main.dir/xiangqi.c.o"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/xiangqi.c.o -MF CMakeFiles/main.dir/xiangqi.c.o.d -o CMakeFiles/main.dir/xiangqi.c.o -c /mnt/hgfs/share/xuexi/demo/xiangqi.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/main.dir/xiangqi.c.o"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/xiangqi.c.o -MF CMakeFiles/main.dir/xiangqi.c.o.d -o CMakeFiles/main.dir/xiangqi.c.o -c /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/xiangqi.c
 
 CMakeFiles/main.dir/xiangqi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/xiangqi.c.i"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/demo/xiangqi.c > CMakeFiles/main.dir/xiangqi.c.i
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/xiangqi.c > CMakeFiles/main.dir/xiangqi.c.i
 
 CMakeFiles/main.dir/xiangqi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/xiangqi.c.s"
-	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/demo/xiangqi.c -o CMakeFiles/main.dir/xiangqi.c.s
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/xiangqi.c -o CMakeFiles/main.dir/xiangqi.c.s
+
+CMakeFiles/main.dir/network.c.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/network.c.o: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/network.c
+CMakeFiles/main.dir/network.c.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/main.dir/network.c.o"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/main.dir/network.c.o -MF CMakeFiles/main.dir/network.c.o.d -o CMakeFiles/main.dir/network.c.o -c /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/network.c
+
+CMakeFiles/main.dir/network.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/main.dir/network.c.i"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/network.c > CMakeFiles/main.dir/network.c.i
+
+CMakeFiles/main.dir/network.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/main.dir/network.c.s"
+	/usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/network.c -o CMakeFiles/main.dir/network.c.s
 
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/main.c.o" \
 "CMakeFiles/main.dir/mouse_cursor_icon.c.o" \
 "CMakeFiles/main.dir/chess.c.o" \
-"CMakeFiles/main.dir/xiangqi.c.o"
+"CMakeFiles/main.dir/xiangqi.c.o" \
+"CMakeFiles/main.dir/network.c.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/main.c.o
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/mouse_cursor_icon.c.o
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/chess.c.o
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/xiangqi.c.o
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/build.make
-/mnt/hgfs/share/xuexi/demo/bin/main: lib/liblvgl.a
-/mnt/hgfs/share/xuexi/demo/bin/main: lvgl/liblvgl_examples.a
-/mnt/hgfs/share/xuexi/demo/bin/main: lvgl/liblvgl_demos.a
-/mnt/hgfs/share/xuexi/demo/bin/main: lvgl/liblvgl_thorvg.a
-/mnt/hgfs/share/xuexi/demo/bin/main: lib/liblvgl.a
-/mnt/hgfs/share/xuexi/demo/bin/main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/hgfs/share/xuexi/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable /mnt/hgfs/share/xuexi/demo/bin/main"
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/main.c.o
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/mouse_cursor_icon.c.o
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/chess.c.o
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/xiangqi.c.o
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/network.c.o
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/build.make
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: lib/liblvgl.a
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: lvgl/liblvgl_examples.a
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: lvgl/liblvgl_demos.a
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: lvgl/liblvgl_thorvg.a
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: lib/liblvgl.a
+/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main: CMakeFiles/main.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/main.dir/build: /mnt/hgfs/share/xuexi/demo/bin/main
+CMakeFiles/main.dir/build: /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/bin/main
 .PHONY : CMakeFiles/main.dir/build
 
 CMakeFiles/main.dir/clean:
@@ -161,6 +177,6 @@ CMakeFiles/main.dir/clean:
 .PHONY : CMakeFiles/main.dir/clean
 
 CMakeFiles/main.dir/depend:
-	cd /mnt/hgfs/share/xuexi/demo/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hgfs/share/xuexi/demo /mnt/hgfs/share/xuexi/demo /mnt/hgfs/share/xuexi/demo/build /mnt/hgfs/share/xuexi/demo/build /mnt/hgfs/share/xuexi/demo/build/CMakeFiles/main.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/build/CMakeFiles/main.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/main.dir/depend
 

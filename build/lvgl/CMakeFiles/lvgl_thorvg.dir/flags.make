@@ -4,7 +4,7 @@
 # compile CXX with /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg
+CXX_INCLUDES = -isystem /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg
 
 CXX_FLAGS = -std=gnu++1z
 

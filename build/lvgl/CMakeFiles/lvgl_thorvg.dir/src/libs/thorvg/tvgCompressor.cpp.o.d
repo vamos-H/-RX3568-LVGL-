@@ -1,10 +1,10 @@
 lvgl/CMakeFiles/lvgl_thorvg.dir/src/libs/thorvg/tvgCompressor.cpp.o: \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgCompressor.cpp \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgCompressor.cpp \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdc-predef.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../lv_conf_internal.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../lv_conf_kconfig.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/../../../../lv_conf.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/config.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../lv_conf_internal.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../lv_conf_kconfig.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/../../../../lv_conf.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/config.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/string \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/aarch64-linux-gnu/bits/c++config.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/aarch64-linux-gnu/bits/os_defines.h \
@@ -135,4 +135,4 @@ lvgl/CMakeFiles/lvgl_thorvg.dir/src/libs/thorvg/tvgCompressor.cpp.o: \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/include/c++/7.5.0/bits/basic_string.tcc \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/memory.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/string.h \
- /mnt/hgfs/share/xuexi/demo/lvgl/src/libs/thorvg/tvgCompressor.h
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/src/libs/thorvg/tvgCompressor.h
