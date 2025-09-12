@@ -3,9 +3,12 @@
 
 #include "lvgl/lvgl.h"
 #include "lvgl/demos/lv_demos.h"
+#include "network.h"
 
 #define RED 0
 #define BLACK 1
+
+extern NetworkState network;
 
 typedef struct qizi
 {

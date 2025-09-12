@@ -428,8 +428,8 @@ CMakeFiles/main.dir/xiangqi.c.o: \
  /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/demos/vector_graphic/../lv_demos.h \
  /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/demos/render/lv_demo_render.h \
  /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/lvgl/demos/render/../lv_demos.h \
- /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.h \
  /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/network.h \
+ /mnt/hgfs/share/xuexi/7网络编程/7projiect_new/demo/chess.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/stdio.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/libio.h \
  /usr/local/arm/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu/aarch64-linux-gnu/libc/usr/include/_G_config.h \

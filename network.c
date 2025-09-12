@@ -17,7 +17,10 @@ void* network_recv_thread(void* arg) {
     while (net->connected) {
         if (network_receive(net, &msg) > 0) {
             // 处理接收到的消息
-            printf("Received message of type: %d\n", msg.type);
+            printf("\n");
+            printf("recv msg type=%d\n", msg.type);
+            printf("recv msg data=%d %d %d %d\n", msg.data[0], msg.data[1], msg.data[2], msg.data[3]);
+            printf("\n");
             process_network_message(&msg);
         } else {
             usleep(10000); // 10ms

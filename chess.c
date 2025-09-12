@@ -7,7 +7,7 @@
 
 lv_obj_t *main_ui = NULL;
 lv_obj_t *game_ui = NULL;
-lv_obj_t *over_ui = NULL;
+lv_obj_t *net_ui = NULL;
 
 NetworkState network;
 
@@ -22,6 +22,17 @@ lv_obj_t *undo_btn = NULL;
 lv_obj_t *redo_btn = NULL;
 lv_obj_t *undo_label = NULL;
 lv_obj_t *redo_label = NULL;
+
+// 全局变量，记录悔棋状态
+static int undo_requested = 0;  // 是否已请求悔棋
+static int undo_responded = 0;  // 是否已回应悔棋请求
+static int undo_accepted = 0;   // 对方是否同意悔棋
+lv_obj_t *wait_msg = NULL;  // 等待消息框
+lv_obj_t *msg_acc = NULL;   // 悔棋成功消息框
+lv_obj_t *msg_rej = NULL;   // 悔棋拒绝消息框
+lv_obj_t *msg_timeout = NULL; // 悔棋超时消息框
+static lv_obj_t *undo_dialog = NULL;
+static lv_timer_t *undo_timeout_timer = NULL;
 
 void display_chi_image(int captured_camp) 
 {
@@ -168,6 +179,19 @@ void button_q_callback(lv_event_t *e)
         
         lv_obj_add_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
         lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+        if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
+            lv_obj_del(net_ui);
+            net_ui = NULL;
+        }
+        network.mode = NETWORK_MODE_NONE;
+        network.connected = 0;
+        //memset(&network, 0, sizeof(NetworkState)); // 重置网络状态
+        player = RED; // 重置玩家为红方
+        current_move = 0; // 重置当前移动步数
+        move_count = 0;   // 重置总移动步数
+        qizi_init(); // 重置棋盘
+        printf("返回主菜单\n");
+
     }
 }
 
@@ -928,6 +952,15 @@ void qizi_event_handler(lv_event_t *e)
         {
             if(selected_qizi == NULL)   //还未选中棋子
             {
+                if(network.mode != NETWORK_MODE_NONE) {
+                    // 网络对战模式下，检查是否轮到当前玩家
+                    if ((network.connected && network.mode == NETWORK_MODE_SERVER && player != RED) ||
+                        (network.connected && network.mode == NETWORK_MODE_CLIENT && player != BLACK)) {
+                        printf("当前不是你的回合，请等待对方操作。\n");
+                        return;
+                    }
+                }
+
                 if(click_qizi->camp == player)
                 {
                     printf("已选择棋子坐标为 x=%d, y=%d\n",click_qizi->x,click_qizi->y);
@@ -944,7 +977,11 @@ void qizi_event_handler(lv_event_t *e)
                 else
                 {
                     //点击了对面的棋子
+                    printf("\n");
+                    printf("当前玩家为: %s\n", (player == RED) ? "RED" : "BLACK");
+                    printf("棋子阵营为：%s\n", (click_qizi->camp == RED) ? "RED" : "BLACK");
                     printf("请点击自己的棋子。\n");
+                    printf("\n");
                 }
 
             }
@@ -1277,7 +1314,7 @@ static void undo_btn_event_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED) 
     {
-        undo_move();
+        network_undo_move();
     }
 }
 
@@ -1344,6 +1381,7 @@ void undo_move(void)
         printf("没有可悔棋的步数\n");
         return;
     }
+
     
     current_move--;
     MoveHistory* move = &move_history[current_move];
@@ -1495,7 +1533,7 @@ void button_net_callback(lv_event_t *e) {
 // 显示网络选择界面
 void show_network_selection(NetworkConfig *config) {
     // 创建网络选择界面
-    lv_obj_t *net_ui = lv_obj_create(lv_scr_act());
+    net_ui = lv_obj_create(lv_scr_act());
     lv_obj_set_size(net_ui, 400, 300);
     lv_obj_align(net_ui, LV_ALIGN_CENTER, 0, 0);
     
@@ -1542,7 +1580,7 @@ void client_btn_callback(lv_event_t *e) {
         
         // 初始化网络为客户端模式
         if (network_init(&network, NETWORK_MODE_CLIENT, config->ip,config->port) == 0) {
-            player = BLACK; // 客户端执黑后手
+            player = RED; // 重置player为红方，客户端执黑
             qizi_init();
             game_screen();
             lv_obj_add_flag(main_ui, LV_OBJ_FLAG_HIDDEN);
@@ -1553,7 +1591,10 @@ void client_btn_callback(lv_event_t *e) {
 
 
 
-
+/*
+    * 处理接收到的网络消息
+    *msg： 接收到的网络消息
+*/
 void process_network_message(const NetworkMessage* msg) {
     switch (msg->type) {
         case MSG_MOVE: {
@@ -1567,23 +1608,18 @@ void process_network_message(const NetworkMessage* msg) {
             if (qizi && qizi->live) {
                 // 执行移动
                 move_qizi(qizi, to_x, to_y);
-                
-                // 切换玩家
-                player = (player == RED) ? BLACK : RED;
             }
             break;
         }
         
         case MSG_UNDO_REQUEST:
             // 处理悔棋请求
-            //show_undo_request_dialog();
+            show_undo_request_dialog();
             break;
             
         case MSG_UNDO_RESPONSE:
             // 处理悔棋响应
-            if (msg->data[0] == 1) { // 同意悔棋
-                //undo_move();
-            }
+            handle_undo_response(msg->data[0]);
             break;
             
         case MSG_RESTART:
@@ -1608,3 +1644,278 @@ void process_network_message(const NetworkMessage* msg) {
             break;
     }
 }
+
+// 悔棋超时回调
+static void undo_timeout_cb(lv_timer_t *timer) {
+    // 标记超时状态
+    undo_responded = 1;
+    undo_accepted = 0;
+    
+    // 安全关闭对话框
+    if (undo_dialog) {
+        lv_msgbox_close(undo_dialog);
+        undo_dialog = NULL;
+    }
+    
+    if (wait_msg) {
+        lv_msgbox_close(wait_msg);
+        wait_msg = NULL;
+    }
+
+    // 只有在还有效的请求时才显示超时消息
+    if (undo_requested) {
+        printf("悔棋请求超时，自动拒绝\n");
+        
+        if (!msg_timeout) {  // 确保不重复创建
+            msg_timeout = lv_msgbox_create(NULL);
+            if (msg_timeout) {  // 检查创建是否成功
+                lv_msgbox_add_text(msg_timeout, "Undo Timeout!");
+                lv_obj_t *btn = lv_msgbox_add_footer_button(msg_timeout, "OK");
+                if (btn) {
+                    lv_obj_add_event_cb(btn, undo_msg_timeout_cb, LV_EVENT_CLICKED, NULL);
+                }
+                lv_obj_center(msg_timeout);
+            }
+        }
+    }
+
+    // 清理定时器
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+
+    // 重置状态
+    undo_requested = 0;
+}
+
+// 显示悔棋请求对话框
+void show_undo_request_dialog(void) {
+    if (undo_dialog) {
+        lv_msgbox_close(undo_dialog);
+        undo_dialog = NULL;
+    }
+    
+    //undo_dialog = lv_msgbox_create(NULL, "悔棋请求", "对方请求悔棋，是否同意？", {"同意", "拒绝"}, true);
+    undo_dialog = lv_msgbox_create(NULL);
+    lv_msgbox_add_text(undo_dialog, "MSG_UNDO_REQUEST");
+    lv_obj_t *btn = lv_msgbox_add_footer_button(undo_dialog, "YES");
+    lv_obj_add_event_cb(btn, undo_yes_callback, LV_EVENT_CLICKED, NULL);
+
+    btn = lv_msgbox_add_footer_button(undo_dialog, "NO");
+    lv_obj_add_event_cb(btn, undo_no_callback, LV_EVENT_CLICKED, NULL);
+    lv_obj_center(undo_dialog);
+
+    
+    // 设置超时计时器（30秒）
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+    }
+
+    undo_timeout_timer = lv_timer_create(undo_timeout_cb, 10000, NULL);
+    lv_timer_set_repeat_count(undo_timeout_timer, 1);
+}
+
+void undo_msg_timeout_cb(lv_event_t *e)
+{
+    if (msg_timeout) {
+        lv_msgbox_close(msg_timeout);
+        msg_timeout = NULL;
+    }
+}
+
+void undo_yes_callback(lv_event_t *e)
+{
+    send_undo_response(1);
+    if(undo_dialog)
+        lv_msgbox_close(undo_dialog);
+    //lv_msgbox_close(undo_dialog);
+    printf("%d\n",__LINE__);
+    undo_dialog = NULL;
+
+    // 本地也执行悔棋
+    printf("开始悔棋\n");
+    undo_move();
+    printf("%d\n",__LINE__);
+    
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+}
+
+void undo_no_callback(lv_event_t *e)
+{
+    send_undo_response(0);
+    if(undo_dialog)
+        lv_msgbox_close(undo_dialog);
+    //lv_msgbox_close(undo_dialog);
+    printf("%d\n",__LINE__);
+    undo_dialog = NULL;
+
+    printf("否定悔棋\n");
+    
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+}
+
+// // 悔棋对话框回调
+// void undo_dialog_callback(lv_event_t *e) {
+//     lv_obj_t *mbox = lv_event_get_target(e);
+//     printf("%d\n",__LINE__);
+//     uint16_t btn_id = lv_msgbox_get_footer(mbox);
+//     printf("btn_id = %d",btn_id);
+//     printf("%d\n",__LINE__);
+
+//     if (btn_id == 0) { // 同意
+//         printf("%d\n",__LINE__);
+//         send_undo_response(1);
+//         // 本地也执行悔棋
+//         undo_move();
+//         printf("%d\n",__LINE__);
+//     } else { // 拒绝
+//         printf("%d\n",__LINE__);;
+//         send_undo_response(0);
+//         printf("%d\n",__LINE__);
+//     }
+    
+//     lv_obj_del(undo_dialog);
+//     printf("%d\n",__LINE__);
+//     undo_dialog = NULL;
+    
+//     if (undo_timeout_timer) {
+//         lv_timer_del(undo_timeout_timer);
+//         undo_timeout_timer = NULL;
+//     }
+// }
+
+// 发送悔棋请求
+void send_undo_request(void) {
+    if (network.connected) {
+        NetworkMessage msg;
+        msg.type = MSG_UNDO_REQUEST;
+        network_send(&network, &msg);
+        
+        // 显示等待响应提示
+        //lv_obj_t *wait_msg = lv_msgbox_create(NULL, "等待响应", "已发送悔棋请求，等待对方响应...", NULL, false);
+        wait_msg = lv_msgbox_create(NULL);
+        lv_msgbox_add_text(wait_msg, "Waiting for opponent's response...");
+
+        lv_obj_center(wait_msg);
+        
+        // 设置超时计时器
+        if (undo_timeout_timer) {
+            lv_timer_del(undo_timeout_timer);
+        }
+        undo_timeout_timer = lv_timer_create(undo_timeout_cb, 10000, NULL);
+        lv_timer_set_repeat_count(undo_timeout_timer, 1);
+        
+        undo_requested = 1;
+        undo_responded = 0;
+    }
+}
+
+// 发送悔棋响应
+void send_undo_response(int accepted) {
+    if (network.connected) {
+        NetworkMessage msg;
+        msg.type = MSG_UNDO_RESPONSE;
+        msg.data[0] = accepted;
+        network_send(&network, &msg);
+        
+        undo_responded = 1;
+        undo_accepted = accepted;
+    }
+}
+
+// 关闭等待消息回调
+void undo_msg_acc_cb(lv_event_t *e) {
+    if (msg_acc) {
+        lv_msgbox_close(msg_acc);
+        msg_acc = NULL;
+    }
+
+    if (wait_msg) {
+        lv_msgbox_close(wait_msg);
+        wait_msg = NULL;
+    }
+    
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+}
+
+void undo_msg_rej_cb(lv_event_t *e) {
+    if (msg_rej) {
+        lv_msgbox_close(msg_rej);
+        msg_rej = NULL;
+    }
+
+    if (wait_msg) {
+        lv_msgbox_close(wait_msg);
+        wait_msg = NULL;
+    }
+    
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+}
+
+// 处理悔棋响应
+void handle_undo_response(int accepted) {
+    if (undo_timeout_timer) {
+        lv_timer_del(undo_timeout_timer);
+        undo_timeout_timer = NULL;
+    }
+    
+    if (accepted) {
+        // 对方同意悔棋，执行悔棋操作
+        printf("对方同意了您的悔棋请求\n");
+        undo_move();
+        
+        // 显示同意提示
+        //lv_obj_t *msg = lv_msgbox_create(NULL, "悔棋已同意", "对方同意了您的悔棋请求", {"确定"}, true);
+        msg_acc = lv_msgbox_create(NULL);
+        lv_msgbox_add_text(msg_acc, "MSG_UNDO_ACCEPTED");
+        lv_obj_t *btn = lv_msgbox_add_footer_button(msg_acc, "OK");
+
+        lv_obj_center(msg_acc);
+
+        lv_obj_add_event_cb(btn, undo_msg_acc_cb, LV_EVENT_CLICKED, NULL);
+    } else {
+        // 对方拒绝悔棋
+        //lv_obj_t *msg = lv_msgbox_create(NULL, "悔棋被拒绝", "对方拒绝了您的悔棋请求", {"确定"}, true);
+        printf("对方拒绝了您的悔棋请求\n");
+        msg_rej = lv_msgbox_create(NULL);
+        lv_msgbox_add_text(msg_rej, "MSG_UNDO_DECLINED");
+        lv_obj_t *btn = lv_msgbox_add_footer_button(msg_rej, "OK");
+        lv_obj_center(msg_rej);
+        lv_obj_add_event_cb(btn, undo_msg_rej_cb, LV_EVENT_CLICKED, NULL);
+    }
+    
+    undo_requested = 0;
+    undo_responded = 1;
+    undo_accepted = accepted;
+}
+
+// 网络悔棋函数
+void network_undo_move(void) {
+    if (network.connected) {
+        // 网络模式下发送悔棋请求
+
+        if(undo_requested) {
+            // 已经有未处理的悔棋请求，忽略新的请求
+            return;
+        }
+        send_undo_request();
+    } else {
+        // 单机模式下直接执行悔棋
+        undo_move();
+    }
+}
+
+

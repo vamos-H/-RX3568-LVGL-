@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 int player = RED; // 当前玩家，RED或BLACK
 
 Qizi* chessboard[10][9]; // 棋盘二维数组

@@ -106,4 +106,24 @@ void connect_btn_callback(lv_event_t *e);
 
 void process_network_message(const NetworkMessage* msg);
 
+
+void show_undo_request_dialog(void);
+
+static void undo_timeout_cb(lv_timer_t *timer);
+
+void show_undo_request_dialog(void);
+
+void send_undo_request(void);
+
+void send_undo_response(int accepted);
+
+void handle_undo_response(int accepted);
+
+void network_undo_move(void);
+void undo_yes_callback(lv_event_t *e);
+void undo_no_callback(lv_event_t *e);
+void undo_msg_acc_cb(lv_event_t *e);
+void undo_msg_rej_cb(lv_event_t *e);
+void undo_msg_timeout_cb(lv_event_t *e);
+
 #endif

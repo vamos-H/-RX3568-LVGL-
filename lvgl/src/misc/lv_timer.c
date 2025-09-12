@@ -220,7 +220,7 @@ void lv_timer_ready(lv_timer_t * timer)
     timer->last_run = lv_tick_get() - timer->period - 1;
 }
 
-void lv_timer_set_repeat_count(lv_timer_t * timer, int32_t repeat_count)
+void  lv_timer_set_repeat_count(lv_timer_t * timer, int32_t repeat_count)
 {
     LV_ASSERT_NULL(timer);
     timer->repeat_count = repeat_count;
