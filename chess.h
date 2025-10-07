@@ -89,7 +89,7 @@ void update_undo_redo_buttons(void);
 
 static void undo_btn_event_cb(lv_event_t * e) ;
 static void redo_btn_event_cb(lv_event_t * e) ;
-
+static void suff_btn_event_cb(lv_event_t *e);
 
 
 void button_net_callback(lv_event_t *e);
@@ -125,5 +125,8 @@ void undo_no_callback(lv_event_t *e);
 void undo_msg_acc_cb(lv_event_t *e);
 void undo_msg_rej_cb(lv_event_t *e);
 void undo_msg_timeout_cb(lv_event_t *e);
+
+void wait_screen(void);
+void button_wait_q_callback(lv_event_t *e);
 
 #endif

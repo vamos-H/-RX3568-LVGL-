@@ -31,6 +31,7 @@ int main(int argc, char **argv)
         return -1;
     }
     
+    // 创建主界面
     game_screen();
     main_screen(net_config);
 

@@ -39,54 +39,36 @@ int network_init(NetworkState* net, NetworkMode mode, const char* ip,const char*
 {
     printf("%s %s %d\n",ip,port,mode);
     memset(net, 0, sizeof(NetworkState));
+    network.room_id = -1; // 初始化房间ID为-1
     net->mode = mode;
     net->connected = 0;
     
     if (mode == NETWORK_MODE_SERVER) {
-        // 服务器模式
-        int server_fd, new_socket;
-        struct sockaddr_in address;
+        // RED服务器模式
+        struct sockaddr_in serv_addr;
         
-        // 创建socket
-        if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
-            perror("socket failed");
+        if ((net->sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            printf("\n Socket creation error \n");
             return -1;
         }
         
-        memset(&address, 0, sizeof(address));
-        address.sin_family = AF_INET;
-        address.sin_addr.s_addr = inet_addr(ip);
-        address.sin_port = htons(atoi(port));
-        int addrlen = sizeof(address);
-        
-        // 绑定
-        if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
-            perror("bind failed1");
-            printf("errno=%d\n",errno);
+        serv_addr.sin_family = AF_INET;
+        serv_addr.sin_port = htons(atoi(port));
+        serv_addr.sin_addr.s_addr = inet_addr(ip);
+
+        // 连接服务器
+        if (connect(net->sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+            printf("\nConnection Failed \n");
             return -1;
         }
         
-        // 监听
-        if (listen(server_fd, 1) < 0) {
-            perror("listen");
-            return -1;
-        }
-        
-        printf("等待客户端连接...\n");
-        
-        // 接受连接
-        struct sockaddr_in client_addr;//保存客户端IP地址
-        memset(&client_addr, 0, sizeof(client_addr));
-        socklen_t client_addrlen = sizeof(client_addr);
-        if ((new_socket = accept(server_fd, (struct sockaddr *)&client_addr, &client_addrlen)) < 0) {
-            perror("accept");
-            return -1;
-        }
-        
-        net->sockfd = new_socket;
         net->connected = 1;
-        
-        printf("客户端已连接\n");
+
+        printf("已连接到服务器\n");
+        NetworkMessage join_msg;
+        join_msg.type = MSG_ROOM_JOIN;
+        join_msg.data[0] = RED; // RED服务器
+        network_send(net, &join_msg);
         
     } else if (mode == NETWORK_MODE_CLIENT) {
         // 客户端模式
@@ -109,6 +91,11 @@ int network_init(NetworkState* net, NetworkMode mode, const char* ip,const char*
         
         net->connected = 1;
         printf("已连接到服务器\n");
+
+        NetworkMessage join_msg;
+        join_msg.type = MSG_ROOM_JOIN;
+        join_msg.data[0] = BLACK; // BLACK客户端
+        network_send(net, &join_msg);
     }
     
     // 创建接收线程
@@ -120,12 +107,15 @@ int network_init(NetworkState* net, NetworkMode mode, const char* ip,const char*
     return 0;
 }
 
-void network_cleanup(NetworkState* net) {
+
+void network_cleanup(NetworkState* net)
+{
     net->connected = 0;
     if (net->recv_thread) {
         pthread_join(net->recv_thread, NULL);
     }
     close(net->sockfd);
+    printf("网络已断开\n");
 }
 
 int network_send(NetworkState* net, const NetworkMessage* msg) {

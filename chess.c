@@ -4,10 +4,13 @@
 #include <time.h>
 #include <stdio.h>
 #include "chess.h"
+#include <string.h>
+#include "network_timer.h"
 
 lv_obj_t *main_ui = NULL;
 lv_obj_t *game_ui = NULL;
 lv_obj_t *net_ui = NULL;
+lv_obj_t *wait_ui = NULL;
 
 NetworkState network;
 
@@ -17,6 +20,8 @@ lv_timer_t *chi_hide_timer = NULL;
 MoveHistory move_history[500];  // 移动历史记录
 int move_count = 0;             // 当前移动步数
 int current_move = 0;           // 当前显示的移动步数
+
+lv_obj_t *suff_btn = NULL;
 
 lv_obj_t *undo_btn = NULL;
 lv_obj_t *redo_btn = NULL;
@@ -176,21 +181,49 @@ void button_q_callback(lv_event_t *e)
     lv_event_code_t code = lv_event_get_code(e);
     if(code == LV_EVENT_CLICKED)
     {
-        
-        lv_obj_add_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
-        lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
-        if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
-            lv_obj_del(net_ui);
-            net_ui = NULL;
+        if(network.mode == NETWORK_MODE_NONE || network.connected == 0) {
+            // 如果当前没有网络连接，直接返回主菜单
+            lv_obj_add_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
+            lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+            if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
+                lv_obj_del(net_ui);
+                net_ui = NULL;
+            }
+            network.mode = NETWORK_MODE_NONE;
+            network.connected = 0;
+            player = RED; // 重置玩家为红方
+            current_move = 0; // 重置当前移动步数
+            move_count = 0;   // 重置总移动步数
+            qizi_init(); // 重置棋盘
+            printf("返回主菜单\n");
+            return;
         }
-        network.mode = NETWORK_MODE_NONE;
-        network.connected = 0;
-        //memset(&network, 0, sizeof(NetworkState)); // 重置网络状态
-        player = RED; // 重置玩家为红方
-        current_move = 0; // 重置当前移动步数
-        move_count = 0;   // 重置总移动步数
-        qizi_init(); // 重置棋盘
-        printf("返回主菜单\n");
+        else {
+            if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
+                lv_obj_del(net_ui);
+                net_ui = NULL;
+            }
+
+            // 如果有网络连接，先断开连接
+            network_cleanup(&network);
+        
+            lv_obj_add_flag(game_ui,LV_OBJ_FLAG_HIDDEN);
+            lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+            if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
+                lv_obj_del(net_ui);
+                net_ui = NULL;
+            }
+            network.mode = NETWORK_MODE_NONE;
+            network.connected = 0;
+            network.room_id = -1;
+            //memset(&network, 0, sizeof(NetworkState)); // 重置网络状态
+            player = RED; // 重置玩家为红方
+            current_move = 0; // 重置当前移动步数
+            move_count = 0;   // 重置总移动步数
+            qizi_init(); // 重置棋盘
+            printf("返回主菜单\n");
+            return;
+        }
 
     }
 }
@@ -1040,7 +1073,68 @@ void qizi_event_handler(lv_event_t *e)
     }
 }
 
+void button_wait_q_callback(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    if(code == LV_EVENT_CLICKED)
+    {
+        if(net_ui != NULL) {        // 如果网络设置界面存在，删除它
+            lv_obj_del(net_ui);
+            net_ui = NULL;
+        }
+        lv_obj_add_flag(wait_ui,LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(main_ui,LV_OBJ_FLAG_HIDDEN);
+        network.mode = NETWORK_MODE_NONE;
+        network.connected = 0;
+        player = RED; // 重置玩家为红方
+        current_move = 0; // 重置当前移动步数
+        move_count = 0;   // 重置总移动步数
+        qizi_init(); // 重置棋盘
+        printf("返回主菜单\n");
+        return;
+    }
+}
 
+void wait_screen(void)
+{
+    wait_ui = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(wait_ui,1024,600);
+    lv_obj_align(wait_ui,LV_ALIGN_CENTER,0,0);
+
+    static lv_style_t wait_style;
+    lv_style_init(&wait_style);
+    lv_style_set_pad_all(&wait_style, 0); //内边距为0
+    lv_style_set_border_width(&wait_style, 0); //边框的宽度为0，移除边框
+    lv_style_set_bg_color(&wait_style, lv_color_hex(0x00ffffff));
+    lv_obj_add_style(wait_ui, &wait_style, 0); //样式添加到窗口控件中
+
+    // 创建等待文本
+    lv_obj_t * wait_label = lv_label_create(wait_ui);
+    lv_label_set_text(wait_label, "Waiting for opponent...");
+    //lv_obj_align(wait_label, LV_ALIGN_CENTER, 0, -50);
+    lv_obj_align(wait_label, LV_ALIGN_TOP_MID, 0, 50);
+    
+    //打印等待gif图片
+    lv_obj_t * pic1 = lv_gif_create(wait_ui);
+    lv_obj_align(pic1,LV_ALIGN_CENTER,0,50);
+    lv_gif_set_src(pic1,"A:./pic/wait.gif");
+
+    // 在wait_ui上创建退出按钮，而不是在还未创建的game_ui上
+    lv_obj_t * button_q = lv_button_create(wait_ui);
+    lv_obj_set_size(button_q,100,200);
+    lv_obj_set_pos(button_q,0,0);
+
+    lv_obj_add_style(button_q, &wait_style, 0);
+
+    lv_obj_t * pic_quit = lv_image_create(button_q);
+    lv_image_set_src(pic_quit,"A:./pic/quit_game.png");
+
+    lv_obj_add_event_cb(button_q, button_wait_q_callback, LV_EVENT_CLICKED, NULL);
+    
+    // 确保wait_ui是可见的
+    lv_obj_clear_flag(wait_ui, LV_OBJ_FLAG_HIDDEN);
+    printf("进入等待界面\n");
+}
 
 void game_screen(void)
 {
@@ -1306,6 +1400,47 @@ void game_screen(void)
     // 重做按钮回调
     lv_obj_add_event_cb(redo_btn, redo_btn_event_cb, LV_EVENT_CLICKED, NULL);
 
+    // 添加认输按钮
+    suff_btn = lv_btn_create(game_ui);
+    lv_obj_set_size(suff_btn,42,78);
+    lv_obj_set_pos(suff_btn,900,450);
+    lv_obj_add_style(suff_btn, &game_style, 0);
+    lv_obj_t *suff_label = lv_image_create(suff_btn);
+    lv_obj_align(suff_label,LV_ALIGN_CENTER,0,0);
+    lv_image_set_src(suff_label,"A:./pic/touxiang.png");
+
+    lv_obj_add_event_cb(suff_btn, suff_btn_event_cb, LV_EVENT_CLICKED, NULL);
+
+}
+
+static void suff_btn_event_cb(lv_event_t *e)
+{
+    if(network.mode == NETWORK_MODE_NONE) {
+        // 本地模式下认输
+        printf("%s认输，游戏结束！\n", (player == RED) ? "红方" : "黑方");
+        if(player == RED)
+        {
+            lv_obj_t * game_over = lv_image_create(game_ui);
+            lv_obj_align(game_over,LV_ALIGN_CENTER,0,0);
+            lv_image_set_src(game_over,"A:./pic/red_lost.png");
+        }
+        else
+        {
+            lv_obj_t * game_over = lv_image_create(game_ui);
+            lv_obj_align(game_over,LV_ALIGN_CENTER,0,0);
+            lv_image_set_src(game_over,"A:./pic/black_lost.png");
+        }
+    }else
+    {
+        // 发送认输消息
+        NetworkMessage msg;
+        msg.type = MSG_SUFF;
+        network_send(&network, &msg);
+        printf("你认输，游戏结束！\n");
+        lv_obj_t * game_over = lv_image_create(game_ui);
+        lv_obj_align(game_over,LV_ALIGN_CENTER,0,0);
+        lv_image_set_src(game_over,"A:./pic/mylost.png");        
+    }
 }
 
 
@@ -1536,6 +1671,11 @@ void show_network_selection(NetworkConfig *config) {
     net_ui = lv_obj_create(lv_scr_act());
     lv_obj_set_size(net_ui, 400, 300);
     lv_obj_align(net_ui, LV_ALIGN_CENTER, 0, 0);
+
+    lv_obj_t * label = lv_label_create(net_ui);
+    lv_label_set_text(label, "Choose your side:");
+    lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 20);  
+
     
     // 添加服务器按钮
     lv_obj_t *server_btn = lv_btn_create(net_ui);
@@ -1564,10 +1704,38 @@ void server_btn_callback(lv_event_t *e) {
         // 初始化网络为服务器模式
         if (network_init(&network, NETWORK_MODE_SERVER, config->ip,config->port) == 0) {
             player = RED; // 服务器执红先手
-            qizi_init();
-            game_screen();
+            network.room_id = -1; // 确保房间ID初始为-1
+            
+            printf("Initializing as RED player...\n");
+            
+            // 首先隐藏主界面
             lv_obj_add_flag(main_ui, LV_OBJ_FLAG_HIDDEN);
-            lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
+            
+            // 删除网络选择界面
+            if (net_ui) {
+                lv_obj_del(net_ui);
+                net_ui = NULL;
+            }
+            
+            // 创建并显示等待界面
+            wait_screen();
+            
+            // 启动连接检查计时器
+            start_connection_check_timer();
+            
+            // 强制更新UI
+            lv_timer_handler();
+            
+            printf("Waiting for opponent...\n");
+            // // 初始化棋盘和界面
+            // lv_obj_clean(wait_ui);
+            // lv_obj_del(wait_ui);
+            // wait_ui = NULL;
+            // net_ui = NULL;
+
+            // qizi_init();
+            // game_screen();
+            // lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
         }
     }
 }
@@ -1580,11 +1748,39 @@ void client_btn_callback(lv_event_t *e) {
         
         // 初始化网络为客户端模式
         if (network_init(&network, NETWORK_MODE_CLIENT, config->ip,config->port) == 0) {
-            player = RED; // 重置player为红方，客户端执黑
-            qizi_init();
-            game_screen();
+            player = RED; // 客户端执黑后手
+            network.room_id = -1; // 确保房间ID初始为-1
+            
+            printf("Initializing as BLACK player...\n");
+            
+            // 首先隐藏主界面
             lv_obj_add_flag(main_ui, LV_OBJ_FLAG_HIDDEN);
-            lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
+            
+            // 删除网络选择界面
+            if (net_ui) {
+                lv_obj_del(net_ui);
+                net_ui = NULL;
+            }
+            
+            // 创建并显示等待界面
+            wait_screen();
+            
+            // 启动连接检查计时器
+            start_connection_check_timer();
+            
+            // 强制更新UI
+            lv_timer_handler();
+            
+            printf("Waiting for opponent...\n");
+            // // 初始化棋盘和界面
+            // lv_obj_clean(wait_ui);
+            // lv_obj_del(wait_ui);
+            // wait_ui = NULL;
+            // net_ui = NULL;
+
+            // qizi_init();
+            // game_screen();
+            // lv_obj_remove_flag(game_ui, LV_OBJ_FLAG_HIDDEN);
         }
     }
 }
@@ -1638,6 +1834,19 @@ void process_network_message(const NetworkMessage* msg) {
         case MSG_CHAT:
             // 显示聊天消息
             //show_chat_message(msg->text);
+            break;
+        case MSG_SUFF:
+            // 对方认输
+            printf("对方认输，你赢了！\n");
+            lv_obj_t * game_over = lv_image_create(game_ui);
+            lv_obj_align(game_over,LV_ALIGN_CENTER,0,0);
+            lv_image_set_src(game_over,"A:./pic/youlost.png");  
+            break;
+
+        case MSG_ROOM_JOIN:
+            // 处理加入房间消息
+            network.room_id = msg->data[0];
+            printf("Joined room %d\n", network.room_id);
             break;
             
         default:
@@ -1726,12 +1935,13 @@ void undo_msg_timeout_cb(lv_event_t *e)
 
 void undo_yes_callback(lv_event_t *e)
 {
+    printf("%d\n",__LINE__);
     send_undo_response(1);
     if(undo_dialog)
         lv_msgbox_close(undo_dialog);
     //lv_msgbox_close(undo_dialog);
-    printf("%d\n",__LINE__);
     undo_dialog = NULL;
+    printf("%d\n",__LINE__);
 
     // 本地也执行悔棋
     printf("开始悔棋\n");
@@ -1742,6 +1952,7 @@ void undo_yes_callback(lv_event_t *e)
         lv_timer_del(undo_timeout_timer);
         undo_timeout_timer = NULL;
     }
+    printf("%d\n",__LINE__);
 }
 
 void undo_no_callback(lv_event_t *e)

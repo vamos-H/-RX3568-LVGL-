@@ -5,8 +5,8 @@
 
 typedef enum {
     NETWORK_MODE_NONE = 0,  //单机模式
-    NETWORK_MODE_SERVER,    // 服务器模式
-    NETWORK_MODE_CLIENT     // 客户端模式
+    NETWORK_MODE_SERVER,    // RED服务器模式
+    NETWORK_MODE_CLIENT     // BLACK客户端模式
 } NetworkMode;              // 网络模式
 
 typedef struct {
@@ -14,6 +14,7 @@ typedef struct {
     NetworkMode mode;
     int connected;          // 连接状态
     pthread_t recv_thread;  // 接收线程
+    int room_id;               // 房间ID
 } NetworkState;             // 网络状态
 
 
@@ -23,7 +24,10 @@ typedef enum {
     MSG_UNDO_RESPONSE,  // 悔棋响应
     MSG_RESTART,        // 重新开始
     MSG_QUIT,           // 退出游戏
-    MSG_CHAT            // 聊天消息
+    MSG_CHAT,           // 聊天消息 
+    MSG_ROOM_JOIN,      // 加入房间
+    MSG_ROOM_LEAVE,     // 离开房间
+    MSG_SUFF            // 认输
 } MessageType;          // 网络消息类型
 
 // 网络消息结构

@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/mouse_cursor_icon.c.o.d"
   "CMakeFiles/main.dir/network.c.o"
   "CMakeFiles/main.dir/network.c.o.d"
+  "CMakeFiles/main.dir/network_timer.c.o"
+  "CMakeFiles/main.dir/network_timer.c.o.d"
   "CMakeFiles/main.dir/xiangqi.c.o"
   "CMakeFiles/main.dir/xiangqi.c.o.d"
 )

@@ -335,6 +335,30 @@ network.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/network.c.s
 .PHONY : network.c.s
 
+network_timer.o: network_timer.c.o
+.PHONY : network_timer.o
+
+# target to build an object file
+network_timer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/network_timer.c.o
+.PHONY : network_timer.c.o
+
+network_timer.i: network_timer.c.i
+.PHONY : network_timer.i
+
+# target to preprocess a source file
+network_timer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/network_timer.c.i
+.PHONY : network_timer.c.i
+
+network_timer.s: network_timer.c.s
+.PHONY : network_timer.s
+
+# target to generate assembly for a file
+network_timer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/network_timer.c.s
+.PHONY : network_timer.c.s
+
 xiangqi.o: xiangqi.c.o
 .PHONY : xiangqi.o
 
@@ -389,6 +413,9 @@ help:
 	@echo "... network.o"
 	@echo "... network.i"
 	@echo "... network.s"
+	@echo "... network_timer.o"
+	@echo "... network_timer.i"
+	@echo "... network_timer.s"
 	@echo "... xiangqi.o"
 	@echo "... xiangqi.i"
 	@echo "... xiangqi.s"
